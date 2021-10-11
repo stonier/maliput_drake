@@ -1,13 +1,13 @@
-#include "drake/systems/framework/leaf_system.h"
+#include "maliput/drake/systems/framework/leaf_system.h"
 
 #include <cmath>
 #include <limits>
 
-#include "drake/common/pointer_cast.h"
-#include "drake/systems/framework/system_symbolic_inspector.h"
-#include "drake/systems/framework/value_checker.h"
+#include "maliput/drake/common/pointer_cast.h"
+#include "maliput/drake/systems/framework/system_symbolic_inspector.h"
+#include "maliput/drake/systems/framework/value_checker.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 namespace {
@@ -1087,7 +1087,7 @@ void LeafSystem<T>::MaybeDeclareVectorBaseInequalityConstraint(
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class ::drake::systems::LeafSystem)
+    class ::maliput::drake::systems::LeafSystem)

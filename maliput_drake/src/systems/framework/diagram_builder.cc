@@ -1,4 +1,4 @@
-#include "drake/systems/framework/diagram_builder.h"
+#include "maliput/drake/systems/framework/diagram_builder.h"
 
 #include <algorithm>
 #include <sstream>
@@ -6,10 +6,10 @@
 #include <tuple>
 #include <unordered_map>
 
-#include "drake/common/drake_assert.h"
-#include "drake/common/drake_throw.h"
+#include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_throw.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 template <typename T>
@@ -416,7 +416,7 @@ std::unique_ptr<typename Diagram<T>::Blueprint> DiagramBuilder<T>::Compile() {
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class ::drake::systems::DiagramBuilder)
+    class ::maliput::drake::systems::DiagramBuilder)

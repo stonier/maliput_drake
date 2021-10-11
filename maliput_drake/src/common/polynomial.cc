@@ -1,4 +1,4 @@
-#include "drake/common/polynomial.h"
+#include "maliput/drake/common/polynomial.h"
 
 #include <algorithm>
 #include <cstring>
@@ -8,8 +8,8 @@
 #include <stdexcept>
 #include <utility>
 
-#include "drake/common/drake_assert.h"
-#include "drake/common/drake_throw.h"
+#include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_throw.h"
 
 using Eigen::Dynamic;
 using Eigen::Matrix;
@@ -19,7 +19,7 @@ using std::runtime_error;
 using std::string;
 using std::vector;
 
-namespace drake {
+namespace maliput::drake {
 template <typename T>
 bool Polynomial<T>::Monomial::HasSameExponents(
     const Monomial& other) const {
@@ -288,7 +288,7 @@ Polynomial<T> Polynomial<T>::Substitute(
     }
   }
   return p;
-}  // namespace drake
+}  // namespace maliput::drake
 
 template <typename T>
 Polynomial<T> Polynomial<T>::Derivative(
@@ -705,7 +705,7 @@ template <typename T>
 class FromExpressionVisitor {
  public:
   Polynomial<T> Visit(const Expression& e) {
-    return drake::symbolic::VisitExpression<Polynomial<T>>(this, e);
+    return maliput::drake::symbolic::VisitExpression<Polynomial<T>>(this, e);
   }
 
  private:
@@ -722,9 +722,9 @@ class FromExpressionVisitor {
   }
 
   static Polynomial<T> VisitMultiplication(const Expression& e) {
-    const auto constant = drake::symbolic::get_constant_in_multiplication(e);
+    const auto constant = maliput::drake::symbolic::get_constant_in_multiplication(e);
     const auto& base_to_exponent_map =
-        drake::symbolic::get_base_to_exponent_map_in_multiplication(e);
+        maliput::drake::symbolic::get_base_to_exponent_map_in_multiplication(e);
     return accumulate(
         base_to_exponent_map.begin(), base_to_exponent_map.end(),
         Polynomial<T>{constant},
@@ -848,7 +848,7 @@ class FromExpressionVisitor {
 
   // Makes VisitExpression a friend of this class so that VisitExpression can
   // use its private methods.
-  friend Polynomial<T> drake::symbolic::VisitExpression<Polynomial<T>>(
+  friend Polynomial<T> maliput::drake::symbolic::VisitExpression<Polynomial<T>>(
       FromExpressionVisitor*, const Expression&);
 };
 
@@ -862,7 +862,7 @@ Polynomial<T> Polynomial<T>::FromExpression(const Expression& e) {
 // template class Polynomial<std::complex<double>>;
 // doesn't work yet because the roots solver can't handle it
 
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class drake::Polynomial)
+    class maliput::drake::Polynomial)

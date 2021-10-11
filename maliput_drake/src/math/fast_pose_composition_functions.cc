@@ -1,4 +1,4 @@
-#include "drake/math/fast_pose_composition_functions.h"
+#include "maliput/drake/math/fast_pose_composition_functions.h"
 
 #include <algorithm>
 #include <cassert>
@@ -12,7 +12,7 @@
 /* Note that we do not include code from drake/common here so that we don't
 have to fight with Eigen regarding the enabling of AVX instructions. */
 
-namespace drake {
+namespace maliput::drake {
 namespace math {
 namespace internal {
 
@@ -584,4 +584,4 @@ void ComposeXinvX(const RigidTransform<double>& X_BA,
 
 }  // namespace internal
 }  // namespace math
-}  // namespace drake
+}  // namespace maliput::drake

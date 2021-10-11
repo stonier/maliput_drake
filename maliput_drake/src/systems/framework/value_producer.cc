@@ -1,12 +1,12 @@
-#include "drake/systems/framework/value_producer.h"
+#include "maliput/drake/systems/framework/value_producer.h"
 
 #include <stdexcept>
 
 #include <fmt/format.h>
 
-#include "drake/common/nice_type_name.h"
+#include "maliput/drake/common/nice_type_name.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 ValueProducer::ValueProducer() = default;
@@ -65,4 +65,4 @@ void ValueProducer::ThrowBadCast(const std::type_info& actual_type,
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

@@ -1,12 +1,12 @@
-#include "drake/math/rotation_matrix.h"
+#include "maliput/drake/math/rotation_matrix.h"
 
 #include <string>
 
 #include <fmt/format.h>
 
-#include "drake/common/unused.h"
+#include "maliput/drake/common/unused.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace math {
 
 template <typename T>
@@ -280,7 +280,7 @@ Vector3<T> RotationMatrix<T>::NormalizeOrThrow(const Vector3<T>& v,
 }
 
 }  // namespace math
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class ::drake::math::RotationMatrix)
+    class ::maliput::drake::math::RotationMatrix)

@@ -4,9 +4,9 @@
 #include <stdexcept>
 #include <utility>
 
-#include "drake/common/symbolic.h"
+#include "maliput/drake/common/symbolic.h"
 #define DRAKE_COMMON_SYMBOLIC_DETAIL_HEADER
-#include "drake/common/symbolic_expression_cell.h"
+#include "maliput/drake/common/symbolic_expression_cell.h"
 #undef DRAKE_COMMON_SYMBOLIC_DETAIL_HEADER
 
 using std::accumulate;
@@ -16,7 +16,7 @@ using std::ostringstream;
 using std::pair;
 using std::runtime_error;
 
-namespace drake {
+namespace maliput::drake {
 namespace symbolic {
 namespace {
 using MonomialBasisMapType = GenericPolynomial<MonomialBasisElement>::MapType;
@@ -320,7 +320,7 @@ class DecomposePolynomialVisitor {
   // Makes VisitExpression a friend of this class so that it can use private
   // methods.
   friend MonomialBasisMapType
-  drake::symbolic::VisitExpression<MonomialBasisMapType>(
+  maliput::drake::symbolic::VisitExpression<MonomialBasisMapType>(
       const DecomposePolynomialVisitor*, const Expression&, const Variables&);
 };
 
@@ -850,4 +850,4 @@ Formula GenericPolynomial<BasisElement>::operator!=(
 template class GenericPolynomial<MonomialBasisElement>;
 template class GenericPolynomial<ChebyshevBasisElement>;
 }  // namespace symbolic
-}  // namespace drake
+}  // namespace maliput::drake

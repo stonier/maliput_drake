@@ -1,19 +1,19 @@
-#include "drake/systems/analysis/velocity_implicit_euler_integrator.h"
+#include "maliput/drake/systems/analysis/velocity_implicit_euler_integrator.h"
 
 #include <cmath>
 #include <limits>
 #include <stdexcept>
 #include <utility>
 
-#include "drake/common/autodiff.h"
-#include "drake/common/drake_assert.h"
-#include "drake/common/text_logging.h"
-#include "drake/math/autodiff_gradient.h"
-#include "drake/math/compute_numerical_gradient.h"
-#include "drake/systems/analysis/implicit_integrator.h"
-#include "drake/systems/framework/basic_vector.h"
+#include "maliput/drake/common/autodiff.h"
+#include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/text_logging.h"
+#include "maliput/drake/math/autodiff_gradient.h"
+#include "maliput/drake/math/compute_numerical_gradient.h"
+#include "maliput/drake/systems/analysis/implicit_integrator.h"
+#include "maliput/drake/systems/framework/basic_vector.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 template <class T>
@@ -645,7 +645,7 @@ bool VelocityImplicitEulerIntegrator<T>::DoImplicitIntegratorStep(const T& h) {
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_NONSYMBOLIC_SCALARS(
-    class ::drake::systems::VelocityImplicitEulerIntegrator)
+    class ::maliput::drake::systems::VelocityImplicitEulerIntegrator)

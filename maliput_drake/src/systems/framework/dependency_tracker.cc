@@ -1,10 +1,10 @@
-#include "drake/systems/framework/dependency_tracker.h"
+#include "maliput/drake/systems/framework/dependency_tracker.h"
 
 #include <algorithm>
 
-#include "drake/common/unused.h"
+#include "maliput/drake/common/unused.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 namespace {
@@ -282,4 +282,4 @@ void DependencyGraph::RepairTrackerPointers(
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

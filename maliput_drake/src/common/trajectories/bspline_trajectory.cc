@@ -1,4 +1,4 @@
-#include "drake/common/trajectories/bspline_trajectory.h"
+#include "maliput/drake/common/trajectories/bspline_trajectory.h"
 
 #include <algorithm>
 #include <functional>
@@ -6,16 +6,16 @@
 
 #include <fmt/format.h>
 
-#include "drake/common/default_scalars.h"
-#include "drake/common/extract_double.h"
-#include "drake/common/symbolic.h"
-#include "drake/common/text_logging.h"
+#include "maliput/drake/common/default_scalars.h"
+#include "maliput/drake/common/extract_double.h"
+#include "maliput/drake/common/symbolic.h"
+#include "maliput/drake/common/text_logging.h"
 
-using drake::symbolic::Expression;
-using drake::symbolic::Variable;
-using drake::trajectories::Trajectory;
+using maliput::drake::symbolic::Expression;
+using maliput::drake::symbolic::Variable;
+using maliput::drake::trajectories::Trajectory;
 
-namespace drake {
+namespace maliput::drake {
 namespace trajectories {
 
 using math::BsplineBasis;
@@ -170,7 +170,7 @@ boolean<T> BsplineTrajectory<T>::operator==(
       this->cols() == other.cols()) {
     boolean<T> result{true};
     for (int i = 0; i < this->num_control_points(); ++i) {
-      result = result && drake::all(this->control_points()[i].array() ==
+      result = result && maliput::drake::all(this->control_points()[i].array() ==
                              other.control_points()[i].array());
       if (std::equal_to<boolean<T>>{}(result, boolean<T>{false})) {
         break;
@@ -191,4 +191,4 @@ bool BsplineTrajectory<T>::CheckInvariants() const {
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
     class BsplineTrajectory);
 }  // namespace trajectories
-}  // namespace drake
+}  // namespace maliput::drake

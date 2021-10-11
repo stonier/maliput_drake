@@ -1,4 +1,4 @@
-#include "drake/math/quadratic_form.h"
+#include "maliput/drake/math/quadratic_form.h"
 
 #include <algorithm>
 
@@ -6,9 +6,9 @@
 #include <Eigen/Eigenvalues>
 #include <fmt/format.h>
 
-#include "drake/math/matrix_util.h"
+#include "maliput/drake/math/matrix_util.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace math {
 Eigen::MatrixXd DecomposePSDmatrixIntoXtransposeTimesX(
     const Eigen::Ref<const Eigen::MatrixXd>& Y, double zero_tol) {
@@ -95,4 +95,4 @@ Eigen::MatrixXd BalanceQuadraticForms(
 }
 
 }  // namespace math
-}  // namespace drake
+}  // namespace maliput::drake

@@ -2,7 +2,7 @@
 
 // #include <gflags/gflags.h>
 
-// #include "drake/common/find_resource.h"
+// #include "maliput/drake/common/find_resource.h"
 
 // DEFINE_string(
 //     print_resource_path, "",
@@ -16,7 +16,7 @@
 //     "first place where this tool attempts to look. This flag cannot be used "
 //     "in combination with the other flags.");
 
-// namespace drake {
+// namespace maliput::drake {
 // namespace {
 
 // int main(int argc, char* argv[]) {
@@ -34,7 +34,7 @@
 //   }
 
 //   if (FLAGS_print_resource_root_environment_variable_name) {
-//     std::cout << drake::kDrakeResourceRootEnvironmentVariableName << "\n";
+//     std::cout << maliput::drake::kDrakeResourceRootEnvironmentVariableName << "\n";
 //     return 0;
 //   }
 
@@ -52,8 +52,8 @@
 // }
 
 // }  // namespace
-// }  // namespace drake
+// }  // namespace maliput::drake
 
 // int main(int argc, char* argv[]) {
-//   return drake::main(argc, argv);
+//   return maliput::drake::main(argc, argv);
 // }

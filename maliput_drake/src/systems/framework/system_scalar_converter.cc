@@ -1,18 +1,18 @@
-#include "drake/systems/framework/system_scalar_converter.h"
+#include "maliput/drake/systems/framework/system_scalar_converter.h"
 
 #include <stdexcept>
 
 #include <fmt/format.h>
 
-#include "drake/common/default_scalars.h"
-#include "drake/common/hash.h"
-#include "drake/common/nice_type_name.h"
+#include "maliput/drake/common/default_scalars.h"
+#include "maliput/drake/common/hash.h"
+#include "maliput/drake/common/nice_type_name.h"
 
 using std::pair;
 using std::type_index;
 using std::type_info;
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 SystemScalarConverter::Key::Key(
@@ -20,8 +20,8 @@ SystemScalarConverter::Key::Key(
     : pair<type_index, type_index>(t_info, u_info) {}
 
 size_t SystemScalarConverter::KeyHasher::operator()(const Key& key) const {
-  drake::DefaultHasher hasher;
-  using drake::hash_append;
+  maliput::drake::DefaultHasher hasher;
+  using maliput::drake::hash_append;
   hash_append(hasher, std::hash<std::type_index>{}(key.first));
   hash_append(hasher, std::hash<std::type_index>{}(key.second));
   return static_cast<size_t>(hasher);
@@ -86,4 +86,4 @@ DRAKE_DEFINE_FUNCTION_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS((
 ))
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

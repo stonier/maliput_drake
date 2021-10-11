@@ -1,8 +1,8 @@
-#include "drake/systems/framework/fixed_input_port_value.h"
+#include "maliput/drake/systems/framework/fixed_input_port_value.h"
 
-#include "drake/systems/framework/context_base.h"
+#include "maliput/drake/systems/framework/context_base.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 AbstractValue* FixedInputPortValue::GetMutableData() {
@@ -16,4 +16,4 @@ AbstractValue* FixedInputPortValue::GetMutableData() {
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

@@ -1,12 +1,12 @@
-#include "drake/common/symbolic_simplification.h"
+#include "maliput/drake/common/symbolic_simplification.h"
 
 #include <optional>
 #include <stdexcept>
 #include <utility>
 
-#include "drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_assert.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace symbolic {
 
 using std::function;
@@ -785,4 +785,4 @@ Rewriter MakeRuleRewriter(const RewritingRule& rule) {
 }
 
 }  // namespace symbolic
-}  // namespace drake
+}  // namespace maliput::drake

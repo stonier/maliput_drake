@@ -1,4 +1,4 @@
-#include "drake/common/symbolic_decompose.h"
+#include "maliput/drake/common/symbolic_decompose.h"
 
 #include <map>
 #include <stdexcept>
@@ -7,7 +7,7 @@
 
 #include <fmt/ostream.h>
 
-namespace drake {
+namespace maliput::drake {
 namespace symbolic {
 
 using std::ostringstream;
@@ -464,7 +464,7 @@ class DecomposeLumpedParametersVisitor {
 
   // Makes VisitExpression a friend of this class so that it can use private
   // methods.
-  friend LumpedFactorization drake::symbolic::VisitExpression<
+  friend LumpedFactorization maliput::drake::symbolic::VisitExpression<
       LumpedFactorization>(const DecomposeLumpedParametersVisitor*,
                            const Expression&, const Variables&);
 };
@@ -503,4 +503,4 @@ DecomposeLumpedParameters(
 }
 
 }  // namespace symbolic
-}  // namespace drake
+}  // namespace maliput::drake

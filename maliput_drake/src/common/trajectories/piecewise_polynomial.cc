@@ -1,4 +1,4 @@
-#include "drake/common/trajectories/piecewise_polynomial.h"
+#include "maliput/drake/common/trajectories/piecewise_polynomial.h"
 
 #include <algorithm>
 #include <memory>
@@ -8,8 +8,8 @@
 #include <Eigen/SparseLU>
 #include <fmt/format.h>
 
-#include "drake/common/drake_assert.h"
-#include "drake/common/drake_throw.h"
+#include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_throw.h"
 
 using std::runtime_error;
 using std::vector;
@@ -17,7 +17,7 @@ using std::abs;
 using std::min;
 using std::max;
 
-namespace drake {
+namespace maliput::drake {
 namespace trajectories {
 
 template <typename T>
@@ -1226,7 +1226,7 @@ Eigen::Matrix<T, 4, 1> PiecewisePolynomial<T>::ComputeCubicSplineCoeffs(
 }
 
 }  // namespace trajectories
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class drake::trajectories::PiecewisePolynomial)
+    class maliput::drake::trajectories::PiecewisePolynomial)

@@ -1,8 +1,8 @@
 // NOLINTNEXTLINE(build/include): Its header file is included in symbolic.h.
 
-#include "drake/common/symbolic.h"
+#include "maliput/drake/common/symbolic.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace symbolic {
 ChebyshevPolynomial::ChebyshevPolynomial(Variable var, int degree)
     : var_{std::move(var)}, degree_{degree} {
@@ -190,4 +190,4 @@ bool ChebyshevPolynomial::operator<(const ChebyshevPolynomial& other) const {
 }
 
 }  // namespace symbolic
-}  // namespace drake
+}  // namespace maliput::drake

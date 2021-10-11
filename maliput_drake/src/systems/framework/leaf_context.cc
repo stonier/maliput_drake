@@ -1,11 +1,11 @@
-#include "drake/systems/framework/leaf_context.h"
+#include "maliput/drake/systems/framework/leaf_context.h"
 
 #include <utility>
 
-#include "drake/systems/framework/basic_vector.h"
-#include "drake/systems/framework/state.h"
+#include "maliput/drake/systems/framework/basic_vector.h"
+#include "maliput/drake/systems/framework/state.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 template <typename T>
@@ -107,7 +107,7 @@ void LeafContext<T>::notify_set_system_id(internal::SystemId id) {
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class ::drake::systems::LeafContext)
+    class ::maliput::drake::systems::LeafContext)

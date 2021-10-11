@@ -1,9 +1,9 @@
-#include "drake/systems/framework/diagram_context.h"
+#include "maliput/drake/systems/framework/diagram_context.h"
 
-#include "drake/systems/framework/basic_vector.h"
-#include "drake/systems/framework/parameters.h"
+#include "maliput/drake/systems/framework/basic_vector.h"
+#include "maliput/drake/systems/framework/parameters.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 template <typename T>
@@ -328,7 +328,7 @@ void DiagramContext<T>::DoPropagateFixContextPointers(
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class ::drake::systems::DiagramContext)
+    class ::maliput::drake::systems::DiagramContext)

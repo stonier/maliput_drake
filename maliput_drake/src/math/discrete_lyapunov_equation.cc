@@ -1,14 +1,14 @@
-#include "drake/math/discrete_lyapunov_equation.h"
+#include "maliput/drake/math/discrete_lyapunov_equation.h"
 
 #include <cmath>
 #include <complex>
 #include <limits>
 #include <stdexcept>
 
-#include "drake/common/drake_assert.h"
-#include "drake/common/is_approx_equal_abstol.h"
+#include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/is_approx_equal_abstol.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace math {
 
 using Eigen::Matrix2d;
@@ -225,4 +225,4 @@ MatrixXd SolveReducedRealDiscreteLyapunovEquation(
 
 }  // namespace internal
 }  // namespace math
-}  // namespace drake
+}  // namespace maliput::drake

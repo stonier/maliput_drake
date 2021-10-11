@@ -1,8 +1,8 @@
-#include "drake/systems/framework/output_port_base.h"
+#include "maliput/drake/systems/framework/output_port_base.h"
 
 #include <utility>
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 OutputPortBase::OutputPortBase(
@@ -16,4 +16,4 @@ OutputPortBase::OutputPortBase(
 OutputPortBase::~OutputPortBase() = default;
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

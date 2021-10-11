@@ -1,4 +1,4 @@
-#include "drake/math/bspline_basis.h"
+#include "maliput/drake/math/bspline_basis.h"
 
 #include <algorithm>
 #include <functional>
@@ -7,9 +7,9 @@
 
 #include <fmt/format.h>
 
-#include "drake/common/default_scalars.h"
+#include "maliput/drake/common/default_scalars.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace math {
 namespace {
 
@@ -148,7 +148,7 @@ bool BsplineBasis<T>::CheckInvariants() const {
       static_cast<int>(knots_.size()) >= 2 * order_;
 }
 }  // namespace math
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class ::drake::math::BsplineBasis)
+    class ::maliput::drake::math::BsplineBasis)

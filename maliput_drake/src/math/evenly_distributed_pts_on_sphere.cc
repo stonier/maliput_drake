@@ -1,8 +1,8 @@
-#include "drake/math/evenly_distributed_pts_on_sphere.h"
+#include "maliput/drake/math/evenly_distributed_pts_on_sphere.h"
 
 #include <cmath>
 
-namespace drake {
+namespace maliput::drake {
 namespace math {
 Eigen::Matrix3Xd UniformPtsOnSphereFibonacci(int num_samples) {
   if (num_samples < 1) {
@@ -22,4 +22,4 @@ Eigen::Matrix3Xd UniformPtsOnSphereFibonacci(int num_samples) {
   return pts;
 }
 }  // namespace math
-}  // namespace drake
+}  // namespace maliput::drake

@@ -1,4 +1,4 @@
-#include "drake/math/barycentric.h"
+#include "maliput/drake/math/barycentric.h"
 
 #include <algorithm>
 #include <memory>
@@ -8,9 +8,9 @@
 
 #include <Eigen/Dense>
 
-#include "drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_assert.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace math {
 
 template <typename T>
@@ -194,6 +194,6 @@ MatrixX<T> BarycentricMesh<T>::MeshValuesFrom(
 }
 
 }  // namespace math
-}  // namespace drake
+}  // namespace maliput::drake
 
-template class ::drake::math::BarycentricMesh<double>;
+template class ::maliput::drake::math::BarycentricMesh<double>;

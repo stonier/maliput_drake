@@ -6,9 +6,9 @@
 #include <string>
 #include <utility>
 
-#include "drake/common/drake_assert.h"
-#include "drake/common/never_destroyed.h"
-#include "drake/common/symbolic.h"
+#include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/never_destroyed.h"
+#include "maliput/drake/common/symbolic.h"
 
 using std::atomic;
 using std::make_shared;
@@ -18,7 +18,7 @@ using std::ostringstream;
 using std::string;
 using std::to_string;
 
-namespace drake {
+namespace maliput::drake {
 namespace symbolic {
 
 Variable::Id Variable::get_next_id() {
@@ -131,4 +131,4 @@ VectorX<Variable> MakeVectorIntegerVariable(const int rows,
 }
 
 }  // namespace symbolic
-}  // namespace drake
+}  // namespace maliput::drake

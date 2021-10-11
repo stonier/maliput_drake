@@ -1,10 +1,10 @@
-#include "drake/systems/framework/system_base.h"
+#include "maliput/drake/systems/framework/system_base.h"
 
 #include <atomic>
 
 #include <fmt/format.h>
 
-#include "drake/systems/framework/fixed_input_port_value.h"
+#include "maliput/drake/systems/framework/fixed_input_port_value.h"
 
 namespace {
 
@@ -15,7 +15,7 @@ std::string FmtFunc(const char* func) {
 
 }
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 SystemBase::~SystemBase() {}
@@ -306,4 +306,4 @@ void SystemBase::ThrowNotCreatedForThisSystemImpl(
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

@@ -1,11 +1,11 @@
-#include "drake/systems/framework/diagram_continuous_state.h"
+#include "maliput/drake/systems/framework/diagram_continuous_state.h"
 
 #include <utility>
 
-#include "drake/common/pointer_cast.h"
-#include "drake/systems/framework/supervector.h"
+#include "maliput/drake/common/pointer_cast.h"
+#include "maliput/drake/systems/framework/supervector.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 template <typename T>
@@ -59,7 +59,7 @@ std::unique_ptr<VectorBase<T>> DiagramContinuousState<T>::Span(
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class ::drake::systems::DiagramContinuousState)
+    class ::maliput::drake::systems::DiagramContinuousState)

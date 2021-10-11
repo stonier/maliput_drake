@@ -1,4 +1,4 @@
-#include "drake/systems/analysis/simulator_config_functions.h"
+#include "maliput/drake/systems/analysis/simulator_config_functions.h"
 
 #include <cctype>
 #include <initializer_list>
@@ -6,22 +6,22 @@
 #include <stdexcept>
 #include <utility>
 
-#include "drake/common/drake_throw.h"
-#include "drake/common/never_destroyed.h"
-#include "drake/common/nice_type_name.h"
-#include "drake/common/unused.h"
-#include "drake/systems/analysis/bogacki_shampine3_integrator.h"
-#include "drake/systems/analysis/explicit_euler_integrator.h"
-#include "drake/systems/analysis/implicit_euler_integrator.h"
-#include "drake/systems/analysis/radau_integrator.h"
-#include "drake/systems/analysis/runge_kutta2_integrator.h"
-#include "drake/systems/analysis/runge_kutta3_integrator.h"
-#include "drake/systems/analysis/runge_kutta5_integrator.h"
-#include "drake/systems/analysis/semi_explicit_euler_integrator.h"
-#include "drake/systems/analysis/velocity_implicit_euler_integrator.h"
-#include "drake/systems/framework/leaf_system.h"
+#include "maliput/drake/common/drake_throw.h"
+#include "maliput/drake/common/never_destroyed.h"
+#include "maliput/drake/common/nice_type_name.h"
+#include "maliput/drake/common/unused.h"
+#include "maliput/drake/systems/analysis/bogacki_shampine3_integrator.h"
+#include "maliput/drake/systems/analysis/explicit_euler_integrator.h"
+#include "maliput/drake/systems/analysis/implicit_euler_integrator.h"
+#include "maliput/drake/systems/analysis/radau_integrator.h"
+#include "maliput/drake/systems/analysis/runge_kutta2_integrator.h"
+#include "maliput/drake/systems/analysis/runge_kutta3_integrator.h"
+#include "maliput/drake/systems/analysis/runge_kutta5_integrator.h"
+#include "maliput/drake/systems/analysis/semi_explicit_euler_integrator.h"
+#include "maliput/drake/systems/analysis/velocity_implicit_euler_integrator.h"
+#include "maliput/drake/systems/framework/leaf_system.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 namespace {
 
@@ -219,4 +219,4 @@ DRAKE_DEFINE_FUNCTION_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_NONSYMBOLIC_SCALARS((
 ))
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

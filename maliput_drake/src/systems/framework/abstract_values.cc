@@ -1,10 +1,10 @@
-#include "drake/systems/framework/abstract_values.h"
+#include "maliput/drake/systems/framework/abstract_values.h"
 
 #include <utility>
 
-#include "drake/common/autodiff.h"
+#include "maliput/drake/common/autodiff.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 AbstractValues::~AbstractValues() {}
@@ -60,4 +60,4 @@ std::unique_ptr<AbstractValues> AbstractValues::Clone() const {
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

@@ -1,10 +1,10 @@
-#include "drake/systems/framework/system_html.h"
+#include "maliput/drake/systems/framework/system_html.h"
 
-#include "drake/systems/framework/diagram.h"
-#include "drake/systems/framework/system.h"
-#include "drake/systems/framework/system_visitor.h"
+#include "maliput/drake/systems/framework/diagram.h"
+#include "maliput/drake/systems/framework/system.h"
+#include "maliput/drake/systems/framework/system_visitor.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 namespace {
@@ -369,4 +369,4 @@ to licensing restrictions.
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

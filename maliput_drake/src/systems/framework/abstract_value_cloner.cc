@@ -1,8 +1,8 @@
-#include "drake/systems/framework/abstract_value_cloner.h"
+#include "maliput/drake/systems/framework/abstract_value_cloner.h"
 
 #include <utility>
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 namespace internal {
 
@@ -24,4 +24,4 @@ std::unique_ptr<AbstractValue> AbstractValueCloner::operator()() const {
 
 }  // namespace internal
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake

@@ -1,10 +1,10 @@
-#include "drake/systems/analysis/radau_integrator.h"
+#include "maliput/drake/systems/analysis/radau_integrator.h"
 
 #include <limits>
 
-#include "drake/common/autodiff.h"
+#include "maliput/drake/common/autodiff.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace systems {
 
 template <typename T, int num_stages>
@@ -653,15 +653,15 @@ MatrixX<T> RadauIntegrator<T, num_stages>::CalcTensorProduct(
 }
 
 }  // namespace systems
-}  // namespace drake
+}  // namespace maliput::drake
 
 // Define class template initializations for double and AutoDiffXd.
 // Note: We don't use the macros in drake/common/default_scalars.h because
 // those macros are designed for functions with only one template argument, and
 // we need to instantiate both scalar types for both the Radau1 and Radau3
 // integrators, which have num_stages set 1 and 2, respectively.
-template class drake::systems::RadauIntegrator<double, 1>;
-template class drake::systems::RadauIntegrator<drake::AutoDiffXd, 1>;
+template class maliput::drake::systems::RadauIntegrator<double, 1>;
+template class maliput::drake::systems::RadauIntegrator<maliput::drake::AutoDiffXd, 1>;
 
-template class drake::systems::RadauIntegrator<double, 2>;
-template class drake::systems::RadauIntegrator<drake::AutoDiffXd, 2>;
+template class maliput::drake::systems::RadauIntegrator<double, 2>;
+template class maliput::drake::systems::RadauIntegrator<maliput::drake::AutoDiffXd, 2>;

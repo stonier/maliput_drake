@@ -1,15 +1,15 @@
-#include "drake/common/trajectories/piecewise_trajectory.h"
+#include "maliput/drake/common/trajectories/piecewise_trajectory.h"
 
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
-#include "drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_assert.h"
 
 using std::uniform_real_distribution;
 using std::vector;
 
-namespace drake {
+namespace maliput::drake {
 namespace trajectories {
 
 template <typename T>
@@ -132,7 +132,7 @@ bool PiecewiseTrajectory<T>::SegmentTimesEqual(
 }
 
 }  // namespace trajectories
-}  // namespace drake
+}  // namespace maliput::drake
 
 DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(
-    class drake::trajectories::PiecewiseTrajectory)
+    class maliput::drake::trajectories::PiecewiseTrajectory)

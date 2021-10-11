@@ -8,8 +8,8 @@
 #include <string>
 #include <utility>
 
-#include "drake/common/hash.h"
-#include "drake/common/symbolic.h"
+#include "maliput/drake/common/hash.h"
+#include "maliput/drake/common/symbolic.h"
 
 using std::includes;
 using std::initializer_list;
@@ -23,7 +23,7 @@ using std::set;
 using std::set_intersection;
 using std::string;
 
-namespace drake {
+namespace maliput::drake {
 namespace symbolic {
 
 Variables::Variables(std::initializer_list<Variable> init) : vars_(init) {}
@@ -150,4 +150,4 @@ ostream& operator<<(ostream& os, const Variables& vars) {
 }
 
 }  // namespace symbolic
-}  // namespace drake
+}  // namespace maliput::drake

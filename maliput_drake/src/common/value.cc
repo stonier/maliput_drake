@@ -1,12 +1,12 @@
-#include "drake/common/value.h"
+#include "maliput/drake/common/value.h"
 
 #include <atomic>
 
 #include <fmt/format.h>
 
-#include "drake/common/text_logging.h"
+#include "maliput/drake/common/text_logging.h"
 
-namespace drake {
+namespace maliput::drake {
 
 namespace internal {
 int ReportZeroHash(const std::type_info& detail) {
@@ -36,7 +36,7 @@ int ReportZeroHash(const std::type_info& detail) {
     log()->warn(message +
         " This is the first instance of an impaired T within this process."
         " Additional instances will not be warned about, but you may set"
-        " the drake::log() level to 'debug' to see all instances.");
+        " the maliput::drake::log() level to 'debug' to see all instances.");
   } else {
     log()->debug(message);
   }
@@ -57,4 +57,4 @@ void AbstractValue::ThrowCastError(const std::string& requested_type) const {
       "the actual type was '{}'.", requested_type, GetNiceTypeName()));
 }
 
-}  // namespace drake
+}  // namespace maliput::drake

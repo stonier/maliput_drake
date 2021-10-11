@@ -6,9 +6,9 @@
 #include <stdexcept>
 #include <utility>
 
-#include "drake/common/symbolic.h"
+#include "maliput/drake/common/symbolic.h"
 #define DRAKE_COMMON_SYMBOLIC_DETAIL_HEADER
-#include "drake/common/symbolic_expression_cell.h"
+#include "maliput/drake/common/symbolic_expression_cell.h"
 #undef DRAKE_COMMON_SYMBOLIC_DETAIL_HEADER
 
 using std::accumulate;
@@ -20,7 +20,7 @@ using std::pair;
 using std::runtime_error;
 using std::to_string;
 
-namespace drake {
+namespace maliput::drake {
 namespace symbolic {
 
 namespace {
@@ -334,7 +334,7 @@ class DecomposePolynomialVisitor {
   // Makes VisitExpression a friend of this class so that it can use private
   // methods.
   friend Polynomial::MapType
-  drake::symbolic::VisitExpression<Polynomial::MapType>(
+  maliput::drake::symbolic::VisitExpression<Polynomial::MapType>(
       const DecomposePolynomialVisitor*, const Expression&, const Variables&);
 };
 
@@ -872,4 +872,4 @@ ostream& operator<<(ostream& os, const Polynomial& p) {
   return os;
 }
 }  // namespace symbolic
-}  // namespace drake
+}  // namespace maliput::drake

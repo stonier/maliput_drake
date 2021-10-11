@@ -1,7 +1,7 @@
 // This file contains the implementation of both drake_assert and drake_throw.
 /* clang-format off to disable clang-format-includes */
-#include "drake/common/drake_assert.h"
-#include "drake/common/drake_throw.h"
+#include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_throw.h"
 /* clang-format on */
 
 #include <atomic>
@@ -11,10 +11,10 @@
 #include <stdexcept>
 #include <string>
 
-#include "drake/common/drake_assertion_error.h"
-#include "drake/common/never_destroyed.h"
+#include "maliput/drake/common/drake_assertion_error.h"
+#include "maliput/drake/common/never_destroyed.h"
 
-namespace drake {
+namespace maliput::drake {
 namespace internal {
 namespace {
 
@@ -68,7 +68,7 @@ void AssertionFailed(const char* condition, const char* func, const char* file,
 }
 
 }  // namespace internal
-}  // namespace drake
+}  // namespace maliput::drake
 
 // Configures the DRAKE_ASSERT and DRAKE_DEMAND assertion failure handling
 // behavior.
@@ -82,6 +82,6 @@ void AssertionFailed(const char* condition, const char* func, const char* file,
 // This method is intended ONLY for use by pydrake bindings, and thus is not
 // declared in any header file, to discourage anyone from using it.
 extern "C" void drake_set_assertion_failure_to_throw_exception() {
-  drake::internal::AssertionConfig::singleton().
+  maliput::drake::internal::AssertionConfig::singleton().
       assertion_failures_are_exceptions = true;
 }

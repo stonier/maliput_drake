@@ -1,4 +1,4 @@
-#include "drake/common/text_logging.h"
+#include "maliput/drake/common/text_logging.h"
 
 #include <memory>
 #include <mutex>
@@ -9,9 +9,9 @@
 #include <spdlog/sinks/stdout_sinks.h>
 #endif
 
-#include "drake/common/never_destroyed.h"
+#include "maliput/drake/common/never_destroyed.h"
 
-namespace drake {
+namespace maliput::drake {
 
 #ifdef HAVE_SPDLOG
 
@@ -56,7 +56,7 @@ logging::sink* logging::get_dist_sink() {
 }
 
 std::string logging::set_log_level(const std::string& level) {
-  spdlog::level::level_enum prev_value = drake::log()->level();
+  spdlog::level::level_enum prev_value = maliput::drake::log()->level();
   spdlog::level::level_enum value{};
   if (level == "trace") {
     value = spdlog::level::trace;
@@ -77,7 +77,7 @@ std::string logging::set_log_level(const std::string& level) {
   } else {
     throw std::runtime_error(fmt::format("Unknown spdlog level: {}", level));
   }
-  drake::log()->set_level(value);
+  maliput::drake::log()->set_level(value);
   switch (prev_value) {
     case spdlog::level::trace: return "trace";
     case spdlog::level::debug: return "debug";
@@ -107,7 +107,7 @@ const char* const logging::kSetLogLevelHelpMessage =
     "'off'";
 
 void logging::set_log_pattern(const std::string& pattern) {
-  drake::log()->set_pattern(pattern);
+  maliput::drake::log()->set_pattern(pattern);
 }
 
 const char* const logging::kSetLogPatternHelpMessage =
@@ -148,4 +148,4 @@ const char* const logging::kSetLogPatternHelpMessage =
 
 const char* const logging::kSetLogLevelUnchanged = "unchanged";
 
-}  // namespace drake
+}  // namespace maliput::drake
