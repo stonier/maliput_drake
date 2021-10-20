@@ -693,7 +693,7 @@ class IntegratorBase {
    */
   // TODO(edrumwri): Update this comment when stretch size is configurable.
   void set_maximum_step_size(const T& max_step_size) {
-    DRAKE_ASSERT(max_step_size >= 0.0);
+    MALIPUT_DRAKE_ASSERT(max_step_size >= 0.0);
     max_step_size_ = max_step_size;
   }
 
@@ -794,7 +794,7 @@ class IntegratorBase {
    @sa get_working_minimum_step_size()
    */
   void set_requested_minimum_step_size(const T& min_step_size) {
-    DRAKE_ASSERT(min_step_size >= 0.0);
+    MALIPUT_DRAKE_ASSERT(min_step_size >= 0.0);
     req_min_step_size_ = min_step_size;
   }
 
@@ -1071,10 +1071,10 @@ class IntegratorBase {
     if constexpr (scalar_predicate<T>::is_bool) {
       // Correct any round-off error that has occurred. Formula below requires
       // that time be non-negative.
-      DRAKE_DEMAND(context_->get_time() >= 0);
+      MALIPUT_DRAKE_DEMAND(context_->get_time() >= 0);
       const double tol = 10 * std::numeric_limits<double>::epsilon() *
           ExtractDoubleOrThrow(max(1.0, max(t_target, context_->get_time())));
-      DRAKE_DEMAND(abs(context_->get_time() - t_target) < tol);
+      MALIPUT_DRAKE_DEMAND(abs(context_->get_time() - t_target) < tol);
     }
 
     context_->SetTime(t_target);

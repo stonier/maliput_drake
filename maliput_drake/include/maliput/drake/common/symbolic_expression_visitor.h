@@ -26,7 +26,7 @@ namespace symbolic {
 /// @pre e.is_polynomial() is true.
 template <typename Result, typename Visitor, typename... Args>
 Result VisitPolynomial(Visitor* v, const Expression& e, Args&&... args) {
-  DRAKE_DEMAND(e.is_polynomial());
+  MALIPUT_DRAKE_DEMAND(e.is_polynomial());
   switch (e.get_kind()) {
     case ExpressionKind::Constant:
       return v->VisitConstant(e, std::forward<Args>(args)...);
@@ -69,12 +69,12 @@ Result VisitPolynomial(Visitor* v, const Expression& e, Args&&... args) {
     case ExpressionKind::Floor:
     case ExpressionKind::IfThenElse:
     case ExpressionKind::UninterpretedFunction:
-      // Unreachable because of `DRAKE_DEMAND(e.is_polynomial())` at the top.
+      // Unreachable because of `MALIPUT_DRAKE_DEMAND(e.is_polynomial())` at the top.
       throw std::domain_error(
           "Unexpected Kind was is_polynomial in VisitPolynomial");
   }
   // Unreachable because all switch cases are accounted for above.
-  DRAKE_UNREACHABLE();
+  MALIPUT_DRAKE_UNREACHABLE();
 }
 
 /// Calls visitor object @p v with a symbolic-expression @p e, and arguments @p
@@ -171,7 +171,7 @@ Result VisitExpression(Visitor* v, const Expression& e, Args&&... args) {
     case ExpressionKind::UninterpretedFunction:
       return v->VisitUninterpretedFunction(e, std::forward<Args>(args)...);
   }
-  DRAKE_UNREACHABLE();
+  MALIPUT_DRAKE_UNREACHABLE();
 }
 
 }  // namespace symbolic

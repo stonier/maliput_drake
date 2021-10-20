@@ -293,7 +293,7 @@ struct is_eigen_nonvector_of
 ///
 /// // We can rewrite the above function into the following using EigenPtr.
 /// void foo(EigenPtr<Eigen::MatrixXd> M) {
-///    DRAKE_THROW_UNLESS(M != nullptr);  // If you want a Release-build check.
+///    MALIPUT_DRAKE_THROW_UNLESS(M != nullptr);  // If you want a Release-build check.
 ///    (*M)(0, 0) = 0;
 /// }
 /// // Note that, call sites should be changed to:
@@ -315,7 +315,7 @@ struct is_eigen_nonvector_of
 /// `Matrix<T>*`, like so:
 /// @code
 /// void bar(Eigen::MatrixXd* M) {
-///   DRAKE_THROW_UNLESS(M != nullptr);
+///   MALIPUT_DRAKE_THROW_UNLESS(M != nullptr);
 ///   // In this case this method only works with 4x3 matrices.
 ///   if (M->rows() != 4 && M->cols() != 3) {
 ///     M->resize(4, 3);
@@ -418,7 +418,7 @@ class EigenPtr {
 
     // Access to value.
     RefType& value() {
-      DRAKE_ASSERT(has_value());
+      MALIPUT_DRAKE_ASSERT(has_value());
       return raw_value();
     }
 
@@ -453,7 +453,7 @@ class EigenPtr {
   // Consolidate getting a reference here.
   RefType& get_reference() const {
     // Keep this tiny so it inlines.
-    DRAKE_ASSERT(m_.has_value());
+    MALIPUT_DRAKE_ASSERT(m_.has_value());
     return m_.value();
   }
 

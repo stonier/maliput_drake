@@ -529,7 +529,7 @@ class Simulator {
   /// extracting information about this trajectory step. Do not call this method
   /// if there is no Context.
   const Context<T>& get_context() const {
-    DRAKE_ASSERT(context_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(context_ != nullptr);
     return *context_;
   }
 
@@ -539,7 +539,7 @@ class Simulator {
   /// You can also modify this prior to calling Initialize() to set initial
   /// conditions. Do not call this method if there is no Context.
   Context<T>& get_mutable_context()  {
-    DRAKE_ASSERT(context_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(context_ != nullptr);
     return *context_;
   }
 
@@ -710,7 +710,7 @@ class Simulator {
   // TODO(sherm1) Add an option where the Simulator returns failed status
   // rather than throwing.
   void CallMonitorUpdateStatusAndMaybeThrow(SimulatorStatus* status) {
-    DRAKE_DEMAND(status != nullptr);
+    MALIPUT_DRAKE_DEMAND(status != nullptr);
     if (!get_monitor()) return;
     const EventStatus monitor_status = get_monitor()(*context_);
     if (monitor_status.severity() == EventStatus::kReachedTermination) {
@@ -907,7 +907,7 @@ T GetPreviousNormalizedValue(const T& value) {
   // Case (a) uses nexttoward(.).
   const long double inf = std::numeric_limits<long double>::infinity();
   const double prev_value = nexttoward(value, -inf);
-  DRAKE_DEMAND(
+  MALIPUT_DRAKE_DEMAND(
       std::fpclassify(ExtractDoubleOrThrow(prev_value)) == FP_NORMAL ||
       std::fpclassify(ExtractDoubleOrThrow(prev_value)) == FP_ZERO);
   return prev_value;

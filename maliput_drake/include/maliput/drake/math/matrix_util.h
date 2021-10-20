@@ -92,8 +92,8 @@ ToSymmetricMatrixFromLowerTriangularColumns(
     const Eigen::MatrixBase<Derived>& lower_triangular_columns) {
   int rows = (-1 + sqrt(1 + 8 * lower_triangular_columns.rows())) / 2;
 
-  DRAKE_ASSERT(rows * (rows + 1) / 2 == lower_triangular_columns.rows());
-  DRAKE_ASSERT(lower_triangular_columns.cols() == 1);
+  MALIPUT_DRAKE_ASSERT(rows * (rows + 1) / 2 == lower_triangular_columns.rows());
+  MALIPUT_DRAKE_ASSERT(lower_triangular_columns.cols() == 1);
 
   maliput::drake::MatrixX<typename Derived::Scalar> symmetric_matrix(rows, rows);
 
@@ -133,15 +133,15 @@ template <typename Derived>
 bool IsPositiveDefinite(const Eigen::MatrixBase<Derived>& matrix,
                         double eigenvalue_tolerance = 0.0,
                         double symmetry_tolerance = 0.0) {
-  DRAKE_DEMAND(eigenvalue_tolerance >= 0);
-  DRAKE_DEMAND(symmetry_tolerance >= 0);
+  MALIPUT_DRAKE_DEMAND(eigenvalue_tolerance >= 0);
+  MALIPUT_DRAKE_DEMAND(symmetry_tolerance >= 0);
   if (!IsSymmetric(matrix, symmetry_tolerance)) return false;
 
   // Note: Eigen's documentation clearly warns against using the faster LDLT
   // for this purpose, as the algorithm cannot handle indefinite matrices.
   Eigen::SelfAdjointEigenSolver<typename Derived::PlainObject> eigensolver(
       matrix);
-  DRAKE_THROW_UNLESS(eigensolver.info() == Eigen::Success);
+  MALIPUT_DRAKE_THROW_UNLESS(eigensolver.info() == Eigen::Success);
   // According to the Lapack manual, the absolute accuracy of eigenvalues is
   // eps*max(|eigenvalues|), so I will write my tolerances relative to that.
   // Anderson et al., Lapack User's Guide, 3rd ed. section 4.7, 1999.

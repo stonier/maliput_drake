@@ -510,8 +510,8 @@ class Event {
    */
   void AddToComposite(TriggerType trigger_type,
                       CompositeEventCollection<T>* events) const {
-    DRAKE_DEMAND(events != nullptr);
-    DRAKE_DEMAND(trigger_type_ == TriggerType::kUnknown ||
+    MALIPUT_DRAKE_DEMAND(events != nullptr);
+    MALIPUT_DRAKE_DEMAND(trigger_type_ == TriggerType::kUnknown ||
                  trigger_type_ == trigger_type);
     DoAddToComposite(trigger_type, &*events);
   }
@@ -521,8 +521,8 @@ class Event {
    * correct trigger type set. Must not have an unknown trigger type.
    */
   void AddToComposite(CompositeEventCollection<T>* events) const {
-    DRAKE_DEMAND(events != nullptr);
-    DRAKE_DEMAND(trigger_type_ != TriggerType::kUnknown);
+    MALIPUT_DRAKE_DEMAND(events != nullptr);
+    MALIPUT_DRAKE_DEMAND(trigger_type_ != TriggerType::kUnknown);
     DoAddToComposite(trigger_type_, &*events);
   }
 
@@ -668,7 +668,7 @@ class PublishEvent final : public Event<T> {
    */
   void handle(const System<T>& system, const Context<T>& context) const {
     // At most one callback can be set.
-    DRAKE_ASSERT(!(callback_ && system_callback_));
+    MALIPUT_DRAKE_ASSERT(!(callback_ && system_callback_));
     if (callback_ != nullptr) {
       callback_(context, *this);
     } else if (system_callback_ != nullptr) {
@@ -776,7 +776,7 @@ class DiscreteUpdateEvent final : public Event<T> {
   void handle(const System<T>& system, const Context<T>& context,
               DiscreteValues<T>* discrete_state) const {
     // At most one callback can be set.
-    DRAKE_ASSERT(!(callback_ && system_callback_));
+    MALIPUT_DRAKE_ASSERT(!(callback_ && system_callback_));
     if (callback_ != nullptr) {
       callback_(context, *this, discrete_state);
     } else if (system_callback_ != nullptr) {
@@ -884,7 +884,7 @@ class UnrestrictedUpdateEvent final : public Event<T> {
   void handle(const System<T>& system, const Context<T>& context,
               State<T>* state) const {
     // At most one callback can be set.
-    DRAKE_ASSERT(!(callback_ && system_callback_));
+    MALIPUT_DRAKE_ASSERT(!(callback_ && system_callback_));
     if (callback_ != nullptr) {
       callback_(context, *this, state);
     } else if (system_callback_ != nullptr) {

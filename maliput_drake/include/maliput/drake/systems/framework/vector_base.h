@@ -45,14 +45,14 @@ class VectorBase {
   /// Returns the element at the given index in the vector.
   /// @pre 0 <= `index` < size()
   T& operator[](int index) {
-    DRAKE_ASSERT(index >= 0);
+    MALIPUT_DRAKE_ASSERT(index >= 0);
     return DoGetAtIndexUnchecked(index);
   }
 
   /// Returns the element at the given index in the vector.
   /// @pre 0 <= `index` < size()
   const T& operator[](int index) const {
-    DRAKE_ASSERT(index >= 0);
+    MALIPUT_DRAKE_ASSERT(index >= 0);
     return DoGetAtIndexUnchecked(index);
   }
 
@@ -133,7 +133,7 @@ class VectorBase {
   /// value.
   /// @throws std::exception if `vec` is the wrong size.
   virtual void CopyToPreSizedVector(EigenPtr<VectorX<T>> vec) const {
-    DRAKE_THROW_UNLESS(vec != nullptr);
+    MALIPUT_DRAKE_THROW_UNLESS(vec != nullptr);
     const int n = vec->rows();
     if (n != size()) { this->ThrowMismatchedSize(n); }
     for (int i = 0; i < n; ++i) {
@@ -148,7 +148,7 @@ class VectorBase {
   /// the value and allocates no memory.
   virtual void ScaleAndAddToVector(const T& scale,
                                    EigenPtr<VectorX<T>> vec) const {
-    DRAKE_THROW_UNLESS(vec != nullptr);
+    MALIPUT_DRAKE_THROW_UNLESS(vec != nullptr);
     const int n = vec->rows();
     if (n != size()) { this->ThrowMismatchedSize(n); }
     for (int i = 0; i < n; ++i) {

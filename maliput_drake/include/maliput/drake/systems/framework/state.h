@@ -35,32 +35,32 @@ class State {
   virtual ~State();
 
   void set_continuous_state(std::unique_ptr<ContinuousState<T>> xc) {
-    DRAKE_DEMAND(xc != nullptr);
+    MALIPUT_DRAKE_DEMAND(xc != nullptr);
     continuous_state_ = std::move(xc);
   }
 
   const ContinuousState<T>& get_continuous_state() const {
-    DRAKE_ASSERT(continuous_state_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(continuous_state_ != nullptr);
     return *continuous_state_.get();
   }
 
   ContinuousState<T>& get_mutable_continuous_state() {
-    DRAKE_ASSERT(continuous_state_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(continuous_state_ != nullptr);
     return *continuous_state_.get();
   }
 
   void set_discrete_state(std::unique_ptr<DiscreteValues<T>> xd) {
-    DRAKE_DEMAND(xd != nullptr);
+    MALIPUT_DRAKE_DEMAND(xd != nullptr);
     discrete_state_ = std::move(xd);
   }
 
   const DiscreteValues<T>& get_discrete_state() const {
-    DRAKE_ASSERT(discrete_state_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(discrete_state_ != nullptr);
     return *discrete_state_.get();
   }
 
   DiscreteValues<T>& get_mutable_discrete_state() {
-    DRAKE_ASSERT(discrete_state_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(discrete_state_ != nullptr);
     return *discrete_state_.get();
   }
 
@@ -75,17 +75,17 @@ class State {
   }
 
   void set_abstract_state(std::unique_ptr<AbstractValues> xa) {
-    DRAKE_DEMAND(xa != nullptr);
+    MALIPUT_DRAKE_DEMAND(xa != nullptr);
     abstract_state_ = std::move(xa);
   }
 
   const AbstractValues& get_abstract_state() const {
-    DRAKE_ASSERT(abstract_state_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(abstract_state_ != nullptr);
     return *abstract_state_.get();
   }
 
   AbstractValues& get_mutable_abstract_state() {
-    DRAKE_ASSERT(abstract_state_ != nullptr);
+    MALIPUT_DRAKE_ASSERT(abstract_state_ != nullptr);
     return *abstract_state_.get();
   }
 

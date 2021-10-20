@@ -25,7 +25,7 @@ PiecewisePolynomial<T>::PiecewisePolynomial(
     const std::vector<PolynomialMatrix>& polynomials,
     const std::vector<T>& breaks)
     : PiecewiseTrajectory<T>(breaks), polynomials_(polynomials) {
-  DRAKE_ASSERT(breaks.size() == (polynomials.size() + 1));
+  MALIPUT_DRAKE_ASSERT(breaks.size() == (polynomials.size() + 1));
   for (int i = 1; i < this->get_number_of_segments(); i++) {
     if (polynomials[i].rows() != polynomials[0].rows())
       throw std::runtime_error(
@@ -43,7 +43,7 @@ PiecewisePolynomial<T>::PiecewisePolynomial(
     const std::vector<Polynomial<T>>& polynomials,
     const std::vector<T>& breaks)
     : PiecewiseTrajectory<T>(breaks) {
-  DRAKE_ASSERT(breaks.size() == (polynomials.size() + 1));
+  MALIPUT_DRAKE_ASSERT(breaks.size() == (polynomials.size() + 1));
 
   for (size_t i = 0; i < polynomials.size(); i++) {
     PolynomialMatrix matrix(1, 1);
@@ -60,7 +60,7 @@ std::unique_ptr<Trajectory<T>> PiecewisePolynomial<T>::Clone() const {
 template <typename T>
 PiecewisePolynomial<T>
 PiecewisePolynomial<T>::derivative(int derivative_order) const {
-  DRAKE_DEMAND(derivative_order >= 0);
+  MALIPUT_DRAKE_DEMAND(derivative_order >= 0);
   PiecewisePolynomial ret = *this;
   if (derivative_order == 0) {
     return ret;
@@ -281,13 +281,13 @@ void PiecewisePolynomial<T>::ConcatenateInTime(
     const PiecewisePolynomial<T>& other) {
   if (!empty()) {
     // Performs basic sanity checks.
-    DRAKE_THROW_UNLESS(this->rows() == other.rows());
-    DRAKE_THROW_UNLESS(this->cols() == other.cols());
+    MALIPUT_DRAKE_THROW_UNLESS(this->rows() == other.rows());
+    MALIPUT_DRAKE_THROW_UNLESS(this->cols() == other.cols());
     const T time_offset = other.start_time() - this->end_time();
     // Absolute tolerance is scaled along with the time scale.
     const T absolute_tolerance = max(abs(this->end_time()), 1.) *
                                       std::numeric_limits<double>::epsilon();
-    DRAKE_THROW_UNLESS(abs(time_offset) < absolute_tolerance);
+    MALIPUT_DRAKE_THROW_UNLESS(abs(time_offset) < absolute_tolerance);
     // Gets instance breaks.
     std::vector<T>& breaks = this->get_mutable_breaks();
     // Drops first break to avoid duplication.
@@ -312,12 +312,12 @@ template <typename T>
 void PiecewisePolynomial<T>::AppendCubicHermiteSegment(
     const T& time, const Eigen::Ref<const MatrixX<T>>& sample,
     const Eigen::Ref<const MatrixX<T>>& sample_dot) {
-  DRAKE_DEMAND(!empty());
-  DRAKE_DEMAND(time > this->end_time());
-  DRAKE_DEMAND(sample.rows() == rows());
-  DRAKE_DEMAND(sample.cols() == cols());
-  DRAKE_DEMAND(sample_dot.rows() == rows());
-  DRAKE_DEMAND(sample_dot.cols() == cols());
+  MALIPUT_DRAKE_DEMAND(!empty());
+  MALIPUT_DRAKE_DEMAND(time > this->end_time());
+  MALIPUT_DRAKE_DEMAND(sample.rows() == rows());
+  MALIPUT_DRAKE_DEMAND(sample.cols() == cols());
+  MALIPUT_DRAKE_DEMAND(sample_dot.rows() == rows());
+  MALIPUT_DRAKE_DEMAND(sample_dot.cols() == cols());
 
   const int segment_index = polynomials_.size() - 1;
   const T dt = time - this->end_time();
@@ -343,10 +343,10 @@ void PiecewisePolynomial<T>::AppendCubicHermiteSegment(
 template <typename T>
 void PiecewisePolynomial<T>::AppendFirstOrderSegment(
     const T& time, const Eigen::Ref<const MatrixX<T>>& sample) {
-  DRAKE_DEMAND(!empty());
-  DRAKE_DEMAND(time > this->end_time());
-  DRAKE_DEMAND(sample.rows() == rows());
-  DRAKE_DEMAND(sample.cols() == cols());
+  MALIPUT_DRAKE_DEMAND(!empty());
+  MALIPUT_DRAKE_DEMAND(time > this->end_time());
+  MALIPUT_DRAKE_DEMAND(sample.rows() == rows());
+  MALIPUT_DRAKE_DEMAND(sample.cols() == cols());
 
   const int segment_index = polynomials_.size() - 1;
   const T dt = time - this->end_time();
@@ -367,7 +367,7 @@ void PiecewisePolynomial<T>::AppendFirstOrderSegment(
 
 template <typename T>
 void PiecewisePolynomial<T>::RemoveFinalSegment() {
-  DRAKE_DEMAND(!empty());
+  MALIPUT_DRAKE_DEMAND(!empty());
   polynomials_.pop_back();
   this->get_mutable_breaks().pop_back();
 }
@@ -390,7 +390,7 @@ void PiecewisePolynomial<T>::ReverseTime() {
         // p_before(t+h).  But we can perform the time-reversal at the same
         // time, using the variant p_after(t) = p_before(h-t).
         const auto& vars = matrix(row, col).GetVariables();
-        DRAKE_ASSERT(vars.size() == 1);
+        MALIPUT_DRAKE_ASSERT(vars.size() == 1);
         const typename Polynomial<T>::VarType& t = *vars.begin();
         matrix(row, col) =
             matrix(row, col).Substitute(t, h - Polynomial<T>(1.0, t));
@@ -411,7 +411,7 @@ void PiecewisePolynomial<T>::ReverseTime() {
 template <typename T>
 void PiecewisePolynomial<T>::ScaleTime(const T& scale) {
   using std::pow;
-  DRAKE_DEMAND(scale > 0.0);
+  MALIPUT_DRAKE_DEMAND(scale > 0.0);
 
   // Update the coefficients.
   for (int i = 0; i < this->get_number_of_segments(); i++) {
@@ -504,7 +504,7 @@ Eigen::Index PiecewisePolynomial<T>::cols() const {
 
 template <typename T>
 void PiecewisePolynomial<T>::Reshape(int rows, int cols) {
-  DRAKE_DEMAND(rows * cols == this->rows() * this->cols());
+  MALIPUT_DRAKE_DEMAND(rows * cols == this->rows() * this->cols());
   for (auto& p : polynomials_) {
     // Accordining to the Eigen documentation, data is preserved when the total
     // number of elements does not change.
@@ -517,10 +517,10 @@ PiecewisePolynomial<T> PiecewisePolynomial<T>::Block(int start_row,
                                                      int start_col,
                                                      int block_rows,
                                                      int block_cols) const {
-  DRAKE_DEMAND(start_row >= 0 && start_row < rows());
-  DRAKE_DEMAND(start_col >= 0 && start_col < cols());
-  DRAKE_DEMAND(block_rows >= 0 && start_row + block_rows <= rows());
-  DRAKE_DEMAND(block_cols >= 0 && start_col + block_cols <= cols());
+  MALIPUT_DRAKE_DEMAND(start_row >= 0 && start_row < rows());
+  MALIPUT_DRAKE_DEMAND(start_col >= 0 && start_col < cols());
+  MALIPUT_DRAKE_DEMAND(block_rows >= 0 && start_row + block_rows <= rows());
+  MALIPUT_DRAKE_DEMAND(block_cols >= 0 && start_col + block_cols <= cols());
 
   std::vector<PolynomialMatrix> block_polynomials;
   std::transform(polynomials_.begin(), polynomials_.end(),
@@ -818,9 +818,9 @@ int PiecewisePolynomial<T>::
   const std::vector<MatrixX<T>>& Y = samples;
   int N = static_cast<int>(times.size());
 
-  DRAKE_DEMAND(triplet_list != nullptr);
-  DRAKE_DEMAND(b != nullptr);
-  DRAKE_DEMAND(b->rows() == 3 * (N - 1));
+  MALIPUT_DRAKE_DEMAND(triplet_list != nullptr);
+  MALIPUT_DRAKE_DEMAND(b != nullptr);
+  MALIPUT_DRAKE_DEMAND(b->rows() == 3 * (N - 1));
 
   int row_idx = 0;
   std::vector<Eigen::Triplet<T>>& triplet_ref = *triplet_list;
@@ -854,7 +854,7 @@ int PiecewisePolynomial<T>::
       triplet_ref.push_back(Eigen::Triplet<T>(row_idx++, 3 * (i + 1) + 1, -2));
     }
   }
-  DRAKE_DEMAND(row_idx == 3 * (N - 1) - 2);
+  MALIPUT_DRAKE_DEMAND(row_idx == 3 * (N - 1) - 2);
   return row_idx;
 }
 
@@ -1068,15 +1068,15 @@ PiecewisePolynomial<T> PiecewisePolynomial<T>::LagrangeInterpolatingPolynomial(
   using std::pow;
 
   // Check the inputs.
-  DRAKE_DEMAND(times.size() > 1);
-  DRAKE_DEMAND(samples.size() == times.size());
+  MALIPUT_DRAKE_DEMAND(times.size() > 1);
+  MALIPUT_DRAKE_DEMAND(samples.size() == times.size());
   const int rows = samples[0].rows();
   const int cols = samples[0].cols();
   for (size_t i = 1; i < times.size(); ++i) {
-    DRAKE_DEMAND(times[i] - times[i - 1] >
+    MALIPUT_DRAKE_DEMAND(times[i] - times[i - 1] >
                  PiecewiseTrajectory<T>::kEpsilonTime);
-    DRAKE_DEMAND(samples[i].rows() == rows);
-    DRAKE_DEMAND(samples[i].cols() == cols);
+    MALIPUT_DRAKE_DEMAND(samples[i].rows() == rows);
+    MALIPUT_DRAKE_DEMAND(samples[i].cols() == cols);
   }
 
   // https://en.wikipedia.org/wiki/Polynomial_interpolation notes that
@@ -1134,7 +1134,7 @@ template <typename T>
 PiecewisePolynomial<T> PiecewisePolynomial<T>::ZeroOrderHold(
     const Eigen::Ref<const VectorX<T>>& breaks,
     const Eigen::Ref<const MatrixX<T>>& samples) {
-  DRAKE_DEMAND(samples.cols() == breaks.size());
+  MALIPUT_DRAKE_DEMAND(samples.cols() == breaks.size());
   std::vector<T> my_breaks(breaks.data(), breaks.data() + breaks.size());
   return PiecewisePolynomial<T>::ZeroOrderHold(my_breaks,
                                                ColsToStdVector(samples));
@@ -1144,7 +1144,7 @@ template <typename T>
 PiecewisePolynomial<T> PiecewisePolynomial<T>::FirstOrderHold(
     const Eigen::Ref<const VectorX<T>>& breaks,
     const Eigen::Ref<const MatrixX<T>>& samples) {
-  DRAKE_DEMAND(samples.cols() == breaks.size());
+  MALIPUT_DRAKE_DEMAND(samples.cols() == breaks.size());
   std::vector<T> my_breaks(breaks.data(), breaks.data() + breaks.size());
   return PiecewisePolynomial<T>::FirstOrderHold(my_breaks,
                                                 ColsToStdVector(samples));
@@ -1155,7 +1155,7 @@ PiecewisePolynomial<T> PiecewisePolynomial<T>::CubicShapePreserving(
     const Eigen::Ref<const VectorX<T>>& breaks,
     const Eigen::Ref<const MatrixX<T>>& samples,
     bool zero_end_point_derivatives) {
-  DRAKE_DEMAND(samples.cols() == breaks.size());
+  MALIPUT_DRAKE_DEMAND(samples.cols() == breaks.size());
   std::vector<T> my_breaks(breaks.data(), breaks.data() + breaks.size());
   return PiecewisePolynomial<T>::CubicShapePreserving(
       my_breaks, ColsToStdVector(samples), zero_end_point_derivatives);
@@ -1168,7 +1168,7 @@ PiecewisePolynomial<T>::CubicWithContinuousSecondDerivatives(
     const Eigen::Ref<const MatrixX<T>>& samples,
     const Eigen::Ref<const VectorX<T>>& samples_dot_start,
     const Eigen::Ref<const VectorX<T>>& samples_dot_end) {
-  DRAKE_DEMAND(samples.cols() == breaks.size());
+  MALIPUT_DRAKE_DEMAND(samples.cols() == breaks.size());
   std::vector<T> my_breaks(breaks.data(), breaks.data() + breaks.size());
   return PiecewisePolynomial<T>::CubicWithContinuousSecondDerivatives(
       my_breaks, ColsToStdVector(samples), samples_dot_start.eval(),
@@ -1180,7 +1180,7 @@ PiecewisePolynomial<T> PiecewisePolynomial<T>::CubicHermite(
     const Eigen::Ref<const VectorX<T>>& breaks,
     const Eigen::Ref<const MatrixX<T>>& samples,
     const Eigen::Ref<const MatrixX<T>>& samples_dot) {
-  DRAKE_DEMAND(samples.cols() == breaks.size());
+  MALIPUT_DRAKE_DEMAND(samples.cols() == breaks.size());
   std::vector<T> my_breaks(breaks.data(), breaks.data() + breaks.size());
   return PiecewisePolynomial<T>::CubicHermite(
       my_breaks, ColsToStdVector(samples), ColsToStdVector(samples_dot));
@@ -1191,7 +1191,7 @@ PiecewisePolynomial<T>
 PiecewisePolynomial<T>::CubicWithContinuousSecondDerivatives(
     const Eigen::Ref<const VectorX<T>>& breaks,
     const Eigen::Ref<const MatrixX<T>>& samples, bool periodic_end_condition) {
-  DRAKE_DEMAND(samples.cols() == breaks.size());
+  MALIPUT_DRAKE_DEMAND(samples.cols() == breaks.size());
   std::vector<T> my_breaks(breaks.data(), breaks.data() + breaks.size());
   return PiecewisePolynomial<T>::CubicWithContinuousSecondDerivatives(
       my_breaks, ColsToStdVector(samples), periodic_end_condition);
@@ -1201,7 +1201,7 @@ template <typename T>
 PiecewisePolynomial<T> PiecewisePolynomial<T>::LagrangeInterpolatingPolynomial(
     const Eigen::Ref<const VectorX<T>>& times,
     const Eigen::Ref<const MatrixX<T>>& samples) {
-  DRAKE_DEMAND(samples.cols() == times.size());
+  MALIPUT_DRAKE_DEMAND(samples.cols() == times.size());
   std::vector<T> my_times(times.data(), times.data() + times.size());
   return PiecewisePolynomial<T>::LagrangeInterpolatingPolynomial(
       my_times, ColsToStdVector(samples));

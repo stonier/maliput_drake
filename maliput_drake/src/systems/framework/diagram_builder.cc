@@ -85,8 +85,8 @@ void DiagramBuilder<T>::Connect(
 
 template <typename T>
 void DiagramBuilder<T>::Connect(const System<T>& src, const System<T>& dest) {
-  DRAKE_THROW_UNLESS(src.num_output_ports() == 1);
-  DRAKE_THROW_UNLESS(dest.num_input_ports() == 1);
+  MALIPUT_DRAKE_THROW_UNLESS(src.num_output_ports() == 1);
+  MALIPUT_DRAKE_THROW_UNLESS(dest.num_input_ports() == 1);
   Connect(src.get_output_port(0), dest.get_input_port(0));
 }
 
@@ -117,7 +117,7 @@ InputPortIndex DiagramBuilder<T>::DeclareInput(
       name == kUseDefaultName
           ? input.get_system().get_name() + "_" + input.get_name()
           : std::get<std::string>(std::move(name));
-  DRAKE_DEMAND(!port_name.empty());
+  MALIPUT_DRAKE_DEMAND(!port_name.empty());
 
   // Reject duplicate declarations.
   if (diagram_input_indices_.count(port_name) != 0) {
@@ -135,7 +135,7 @@ InputPortIndex DiagramBuilder<T>::DeclareInput(
 template <typename T>
 void DiagramBuilder<T>::ConnectInput(
     const std::string& diagram_port_name, const InputPort<T>& input) {
-  DRAKE_THROW_UNLESS(diagram_input_indices_.count(diagram_port_name));
+  MALIPUT_DRAKE_THROW_UNLESS(diagram_input_indices_.count(diagram_port_name));
   ConnectInput(diagram_input_indices_[diagram_port_name], input);
 }
 
@@ -145,7 +145,7 @@ void DiagramBuilder<T>::ConnectInput(
   InputPortLocator id{&input.get_system(), input.get_index()};
   ThrowIfInputAlreadyWired(id);
   ThrowIfSystemNotRegistered(&input.get_system());
-  DRAKE_THROW_UNLESS(
+  MALIPUT_DRAKE_THROW_UNLESS(
       diagram_port_index < InputPortIndex(diagram_input_data_.size()));
 
   // Check that port types match.
@@ -206,7 +206,7 @@ OutputPortIndex DiagramBuilder<T>::ExportOutput(
       name == kUseDefaultName
           ? output.get_system().get_name() + "_" + output.get_name()
           : std::get<std::string>(std::move(name));
-  DRAKE_DEMAND(!port_name.empty());
+  MALIPUT_DRAKE_DEMAND(!port_name.empty());
   output_port_names_.emplace_back(std::move(port_name));
 
   return return_id;
@@ -245,7 +245,7 @@ void DiagramBuilder<T>::ThrowIfInputAlreadyWired(
 template <typename T>
 void DiagramBuilder<T>::ThrowIfSystemNotRegistered(
     const System<T>* system) const {
-  DRAKE_DEMAND(system != nullptr);
+  MALIPUT_DRAKE_DEMAND(system != nullptr);
   if (systems_.count(system) == 0) {
     throw std::logic_error(fmt::format(
         "DiagramBuilder: Cannot operate on ports of System {} "
@@ -286,12 +286,12 @@ bool HasCycleRecurse(
     const std::map<PortIdentifier, std::set<PortIdentifier>>& edges,
     std::set<PortIdentifier>* visited,
     std::vector<PortIdentifier>* stack) {
-  DRAKE_ASSERT(visited->count(n) == 0);
+  MALIPUT_DRAKE_ASSERT(visited->count(n) == 0);
   visited->insert(n);
 
   auto edge_iter = edges.find(n);
   if (edge_iter != edges.end()) {
-    DRAKE_ASSERT(std::find(stack->begin(), stack->end(), n) == stack->end());
+    MALIPUT_DRAKE_ASSERT(std::find(stack->begin(), stack->end(), n) == stack->end());
     stack->push_back(n);
     for (const auto& target : edge_iter->second) {
       if (visited->count(target) == 0 &&

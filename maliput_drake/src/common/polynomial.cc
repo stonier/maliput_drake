@@ -293,7 +293,7 @@ Polynomial<T> Polynomial<T>::Substitute(
 template <typename T>
 Polynomial<T> Polynomial<T>::Derivative(
     int derivative_order) const {
-  DRAKE_DEMAND(derivative_order >= 0);
+  MALIPUT_DRAKE_DEMAND(derivative_order >= 0);
   if (!is_univariate_)
     throw runtime_error(
         "Derivative is only defined for univariate polynomials");
@@ -622,12 +622,12 @@ template <typename T>
 typename Polynomial<T>::VarType
 Polynomial<T>::VariableNameToId(const string name,
                                               const unsigned int m) {
-  DRAKE_THROW_UNLESS(IsValidVariableName(name));
+  MALIPUT_DRAKE_THROW_UNLESS(IsValidVariableName(name));
   unsigned int multiplier = 1;
   VarType name_part = 0;
   for (int i = static_cast<int>(name.size()) - 1; i >= 0; i--) {
     const char* const character_match = strchr(kNameChars, name[i]);
-    DRAKE_ASSERT(character_match != nullptr);
+    MALIPUT_DRAKE_ASSERT(character_match != nullptr);
     VarType offset = static_cast<VarType>(character_match - kNameChars);
     name_part += (offset + 1) * multiplier;
     multiplier *= kNumNameChars + 1;
@@ -732,8 +732,8 @@ class FromExpressionVisitor {
            const pair<const Expression, Expression>& p) {
           const Expression& base{p.first};
           const Expression& exponent{p.second};
-          DRAKE_ASSERT(base.is_polynomial());
-          DRAKE_ASSERT(is_constant(exponent));
+          MALIPUT_DRAKE_ASSERT(base.is_polynomial());
+          MALIPUT_DRAKE_ASSERT(is_constant(exponent));
           return polynomial *
                  pow(Polynomial<T>::FromExpression(base),
                      static_cast<int>(get_constant_value(exponent)));
@@ -741,10 +741,10 @@ class FromExpressionVisitor {
   }
 
   static Polynomial<T> VisitDivision(const Expression& e) {
-    DRAKE_ASSERT(e.is_polynomial());
+    MALIPUT_DRAKE_ASSERT(e.is_polynomial());
     const auto& first_arg{get_first_argument(e)};
     const auto& second_arg{get_second_argument(e)};
-    DRAKE_ASSERT(is_constant(second_arg));
+    MALIPUT_DRAKE_ASSERT(is_constant(second_arg));
     return Polynomial<T>::FromExpression(first_arg) /
            get_constant_value(second_arg);
   }
@@ -763,7 +763,7 @@ class FromExpressionVisitor {
   }
 
   static Polynomial<T> VisitPow(const Expression& e) {
-    DRAKE_ASSERT(e.is_polynomial());
+    MALIPUT_DRAKE_ASSERT(e.is_polynomial());
     const int exponent{
         static_cast<int>(get_constant_value(get_second_argument(e)))};
     return pow(Polynomial<T>::FromExpression(get_first_argument(e)), exponent);

@@ -8,9 +8,9 @@
 /// and disarmed independently from the system-wide asserts.
 
 #ifdef DRAKE_DOXYGEN_CXX
-/// @p DRAKE_ASSERT(condition) is similar to the built-in @p assert(condition)
+/// @p MALIPUT_DRAKE_ASSERT(condition) is similar to the built-in @p assert(condition)
 /// from the C++ system header @p <cassert>.  Unless Drake's assertions are
-/// disarmed by the pre-processor definitions listed below, @p DRAKE_ASSERT
+/// disarmed by the pre-processor definitions listed below, @p MALIPUT_DRAKE_ASSERT
 /// will evaluate @p condition and iff the value is false will trigger an
 /// assertion failure with a message showing at least the condition text,
 /// function name, file, and line.
@@ -21,32 +21,32 @@
 ///
 /// Assertions are enabled or disabled using the following pre-processor macros:
 ///
-/// - If @p DRAKE_ENABLE_ASSERTS is defined, then @p DRAKE_ASSERT is armed.
-/// - If @p DRAKE_DISABLE_ASSERTS is defined, then @p DRAKE_ASSERT is disarmed.
+/// - If @p MALIPUT_DRAKE_ENABLE_ASSERTS is defined, then @p MALIPUT_DRAKE_ASSERT is armed.
+/// - If @p MALIPUT_DRAKE_DISABLE_ASSERTS is defined, then @p MALIPUT_DRAKE_ASSERT is disarmed.
 /// - If both macros are defined, then it is a compile-time error.
 /// - If neither are defined, then NDEBUG governs assertions as usual.
 ///
-/// This header will define exactly one of either @p DRAKE_ASSERT_IS_ARMED or
-/// @p DRAKE_ASSERT_IS_DISARMED to indicate whether @p DRAKE_ASSERT is armed.
+/// This header will define exactly one of either @p MALIPUT_DRAKE_ASSERT_IS_ARMED or
+/// @p MALIPUT_DRAKE_ASSERT_IS_DISARMED to indicate whether @p MALIPUT_DRAKE_ASSERT is armed.
 ///
 /// This header will define both `constexpr bool maliput::drake::kDrakeAssertIsArmed`
 /// and `constexpr bool maliput::drake::kDrakeAssertIsDisarmed` globals.
 ///
 /// One difference versus the standard @p assert(condition) is that the
-/// @p condition within @p DRAKE_ASSERT is always syntax-checked, even if
+/// @p condition within @p MALIPUT_DRAKE_ASSERT is always syntax-checked, even if
 /// Drake's assertions are disarmed.
 ///
-/// Treat @p DRAKE_ASSERT like a statement -- it must always be used
+/// Treat @p MALIPUT_DRAKE_ASSERT like a statement -- it must always be used
 /// in block scope, and must always be followed by a semicolon.
-#define DRAKE_ASSERT(condition)
-/// Like @p DRAKE_ASSERT, except that the expression must be void-valued; this
+#define MALIPUT_DRAKE_ASSERT(condition)
+/// Like @p MALIPUT_DRAKE_ASSERT, except that the expression must be void-valued; this
 /// allows for guarding expensive assertion-checking subroutines using the same
 /// macros as stand-alone assertions.
-#define DRAKE_ASSERT_VOID(expression)
+#define MALIPUT_DRAKE_ASSERT_VOID(expression)
 /// Evaluates @p condition and iff the value is false will trigger an assertion
 /// failure with a message showing at least the condition text, function name,
 /// file, and line.
-#define DRAKE_DEMAND(condition)
+#define MALIPUT_DRAKE_DEMAND(condition)
 /// Silences a "no return value" compiler warning by calling a function that
 /// always raises an exception or aborts (i.e., a function marked noreturn).
 /// Only use this macro at a point where (1) a point in the code is truly
@@ -58,26 +58,26 @@
 /// *not* use this macro as a "logic error" assertion; it should *only* be used
 /// to silence false positive warnings.  When in doubt, throw an exception
 /// manually instead of using this macro.
-#define DRAKE_UNREACHABLE()
+#define MALIPUT_DRAKE_UNREACHABLE()
 #else  //  DRAKE_DOXYGEN_CXX
 
 // Users should NOT set these; only this header should set them.
-#ifdef DRAKE_ASSERT_IS_ARMED
-# error Unexpected DRAKE_ASSERT_IS_ARMED defined.
+#ifdef MALIPUT_DRAKE_ASSERT_IS_ARMED
+# error Unexpected MALIPUT_DRAKE_ASSERT_IS_ARMED defined.
 #endif
-#ifdef DRAKE_ASSERT_IS_DISARMED
-# error Unexpected DRAKE_ASSERT_IS_DISARMED defined.
+#ifdef MALIPUT_DRAKE_ASSERT_IS_DISARMED
+# error Unexpected MALIPUT_DRAKE_ASSERT_IS_DISARMED defined.
 #endif
 
 // Decide whether Drake assertions are enabled.
-#if defined(DRAKE_ENABLE_ASSERTS) && defined(DRAKE_DISABLE_ASSERTS)
+#if defined(MALIPUT_DRAKE_ENABLE_ASSERTS) && defined(MALIPUT_DRAKE_DISABLE_ASSERTS)
 # error Conflicting assertion toggles.
-#elif defined(DRAKE_ENABLE_ASSERTS)
-# define DRAKE_ASSERT_IS_ARMED
-#elif defined(DRAKE_DISABLE_ASSERTS) || defined(NDEBUG)
-# define DRAKE_ASSERT_IS_DISARMED
+#elif defined(MALIPUT_DRAKE_ENABLE_ASSERTS)
+# define MALIPUT_DRAKE_ASSERT_IS_ARMED
+#elif defined(MALIPUT_DRAKE_DISABLE_ASSERTS) || defined(NDEBUG)
+# define MALIPUT_DRAKE_ASSERT_IS_DISARMED
 #else
-# define DRAKE_ASSERT_IS_ARMED
+# define MALIPUT_DRAKE_ASSERT_IS_ARMED
 #endif
 
 namespace maliput::drake {
@@ -105,11 +105,11 @@ struct ConditionTraits {
 }  // namespace assert
 }  // namespace maliput::drake
 
-#define DRAKE_UNREACHABLE()                                             \
+#define MALIPUT_DRAKE_UNREACHABLE()                                             \
   ::maliput::drake::internal::Abort(                                             \
       "Unreachable code was reached?!", __func__, __FILE__, __LINE__)
 
-#define DRAKE_DEMAND(condition)                                              \
+#define MALIPUT_DRAKE_DEMAND(condition)                                              \
   do {                                                                       \
     typedef ::maliput::drake::assert::ConditionTraits<                                \
         typename std::remove_cv_t<decltype(condition)>> Trait;               \
@@ -120,14 +120,14 @@ struct ConditionTraits {
     }                                                                        \
   } while (0)
 
-#ifdef DRAKE_ASSERT_IS_ARMED
+#ifdef MALIPUT_DRAKE_ASSERT_IS_ARMED
 // Assertions are enabled.
 namespace maliput::drake {
 constexpr bool kDrakeAssertIsArmed = true;
 constexpr bool kDrakeAssertIsDisarmed = false;
 }  // namespace maliput::drake
-# define DRAKE_ASSERT(condition) DRAKE_DEMAND(condition)
-# define DRAKE_ASSERT_VOID(expression) do {                     \
+# define MALIPUT_DRAKE_ASSERT(condition) MALIPUT_DRAKE_DEMAND(condition)
+# define MALIPUT_DRAKE_ASSERT_VOID(expression) do {                     \
     static_assert(                                              \
         std::is_convertible_v<decltype(expression), void>,      \
         "Expression should be void.");                          \
@@ -139,11 +139,11 @@ namespace maliput::drake {
 constexpr bool kDrakeAssertIsArmed = false;
 constexpr bool kDrakeAssertIsDisarmed = true;
 }  // namespace maliput::drake
-# define DRAKE_ASSERT(condition) static_assert(                        \
+# define MALIPUT_DRAKE_ASSERT(condition) static_assert(                        \
     ::maliput::drake::assert::ConditionTraits<                                  \
         typename std::remove_cv_t<decltype(condition)>>::is_valid,     \
     "Condition should be bool-convertible.");
-# define DRAKE_ASSERT_VOID(expression) static_assert(           \
+# define MALIPUT_DRAKE_ASSERT_VOID(expression) static_assert(           \
     std::is_convertible_v<decltype(expression), void>,          \
     "Expression should be void.")
 #endif

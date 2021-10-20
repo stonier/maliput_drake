@@ -142,7 +142,7 @@ class OutputPort : public OutputPortBase {
           "OutputPort::Allocate(): allocator returned a nullptr for {}.",
           GetFullDescription()));
     }
-    DRAKE_ASSERT_VOID(CheckValidAllocation(*value));
+    MALIPUT_DRAKE_ASSERT_VOID(CheckValidAllocation(*value));
     return value;
   }
 
@@ -153,9 +153,9 @@ class OutputPort : public OutputPortBase {
   that the given `value` has exactly the same concrete type as is returned by
   the Allocate() method. */
   void Calc(const Context<T>& context, AbstractValue* value) const {
-    DRAKE_DEMAND(value != nullptr);
+    MALIPUT_DRAKE_DEMAND(value != nullptr);
     ValidateSystemId(context.get_system_id());
-    DRAKE_ASSERT_VOID(ThrowIfInvalidPortValueType(context, *value));
+    MALIPUT_DRAKE_ASSERT_VOID(ThrowIfInvalidPortValueType(context, *value));
     DoCalc(context, value);
   }
 
@@ -194,7 +194,7 @@ class OutputPort : public OutputPortBase {
         system_{*system} {
     // Check the precondition on identical parameters; note that comparing as
     // void* is only valid because we have single inheritance.
-    DRAKE_DEMAND(static_cast<const void*>(system) == system_interface);
+    MALIPUT_DRAKE_DEMAND(static_cast<const void*>(system) == system_interface);
   }
 
   /** A concrete %OutputPort must provide a way to allocate a suitable object

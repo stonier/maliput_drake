@@ -55,9 +55,9 @@ string GetIntegratorName() {
 
   // Strip off "Integrator<double>" suffix to leave just "FooBar".
   const string suffix = "Integrator<double>";
-  DRAKE_DEMAND(class_name.size() > suffix.size());
+  MALIPUT_DRAKE_DEMAND(class_name.size() > suffix.size());
   const size_t suffix_begin = class_name.size() - suffix.size();
-  DRAKE_DEMAND(class_name.substr(suffix_begin) == suffix);
+  MALIPUT_DRAKE_DEMAND(class_name.substr(suffix_begin) == suffix);
   const string camel_name = class_name.substr(0, suffix_begin);
 
   // Convert "FooBar to "foo_bar".
@@ -149,7 +149,7 @@ IntegratorBase<T>& ResetIntegratorFromFlags(
     Simulator<T>* simulator,
     const string& scheme,
     const T& max_step_size) {
-  DRAKE_THROW_UNLESS(simulator != nullptr);
+  MALIPUT_DRAKE_THROW_UNLESS(simulator != nullptr);
 
   const auto& name_func_pairs = GetAllNamedResetIntegratorFuncs<T>();
   for (const auto& [one_name, one_func] : name_func_pairs) {
@@ -177,7 +177,7 @@ const vector<string>& GetIntegrationSchemes() {
 void ApplySimulatorConfig(
     Simulator<double>* simulator,
     const SimulatorConfig& config) {
-  DRAKE_THROW_UNLESS(simulator != nullptr);
+  MALIPUT_DRAKE_THROW_UNLESS(simulator != nullptr);
   IntegratorBase<double>& integrator = ResetIntegratorFromFlags(
           simulator, config.integration_scheme, config.max_step_size);
   if (integrator.supports_error_estimation()) {
@@ -202,7 +202,7 @@ SimulatorConfig ExtractSimulatorConfig(
   if (integrator.supports_error_estimation()) {
     result.use_error_control = !integrator.get_fixed_step_mode();
     const double accuracy_in_use = integrator.get_accuracy_in_use();
-    DRAKE_DEMAND(!std::isnan(accuracy_in_use));
+    MALIPUT_DRAKE_DEMAND(!std::isnan(accuracy_in_use));
     result.accuracy = accuracy_in_use;
   } else {
     result.use_error_control = false;

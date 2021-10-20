@@ -245,7 +245,7 @@ class CacheEntryValue {
   situation (and you probably are not!), use GetAbstractValueOrThrow()
   instead. */
   const AbstractValue& get_abstract_value() const {
-#ifdef DRAKE_ASSERT_IS_ARMED
+#ifdef MALIPUT_DRAKE_ASSERT_IS_ARMED
     return GetAbstractValueOrThrowHelper(__func__);
 #else
     return *value_;
@@ -261,7 +261,7 @@ class CacheEntryValue {
   @tparam V The known actual value type. */
   template <typename V>
   const V& get_value() const {
-#ifdef DRAKE_ASSERT_IS_ARMED
+#ifdef MALIPUT_DRAKE_ASSERT_IS_ARMED
     return GetValueOrThrowHelper<V>(__func__);
 #else
     return value_->get_value<V>();
@@ -281,7 +281,7 @@ class CacheEntryValue {
   @tparam V The known actual value type. */
   template <typename V>
   void set_value(const V& new_value) {
-#ifdef DRAKE_ASSERT_IS_ARMED
+#ifdef MALIPUT_DRAKE_ASSERT_IS_ARMED
     SetValueOrThrowHelper<V>(__func__, new_value);
 #else
     ThrowIfFrozen(__func__);
@@ -299,8 +299,8 @@ class CacheEntryValue {
   @throws std::exception if the cache is frozen.
   */
   void swap_value(std::unique_ptr<AbstractValue>* other_value) {
-    DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
-    DRAKE_ASSERT_VOID(ThrowIfBadOtherValue(__func__, other_value));
+    MALIPUT_DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
+    MALIPUT_DRAKE_ASSERT_VOID(ThrowIfBadOtherValue(__func__, other_value));
     ThrowIfFrozen(__func__);
     value_.swap(*other_value);
     ++serial_number_;
@@ -319,7 +319,7 @@ class CacheEntryValue {
   there is no value here; use has_value() if you aren't sure.
   @see needs_recomputation() */
   bool is_out_of_date() const {
-    DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
+    MALIPUT_DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
     return (flags_ & kValueIsOutOfDate) != 0;
   }
 
@@ -333,7 +333,7 @@ class CacheEntryValue {
   However, operation of _this_ method is unaffected by whether the cache
   is frozen. */
   bool needs_recomputation() const {
-    DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
+    MALIPUT_DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
     return flags_ != kReadyToUse;
   }
 
@@ -354,7 +354,7 @@ class CacheEntryValue {
   will be accessible in the frozen cache, regardless of whether it is any
   good! */
   void mark_up_to_date() {
-    DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
+    MALIPUT_DRAKE_ASSERT_VOID(ThrowIfNoValuePresent(__func__));
     flags_ &= ~kValueIsOutOfDate;
   }
 
@@ -498,8 +498,8 @@ class CacheEntryValue {
         description_(std::move(description)),
         owning_subcontext_(owning_subcontext),
         value_(std::move(initial_value)) {
-    DRAKE_DEMAND(index.is_valid() && ticket.is_valid());
-    DRAKE_DEMAND(owning_subcontext != nullptr);
+    MALIPUT_DRAKE_DEMAND(index.is_valid() && ticket.is_valid());
+    MALIPUT_DRAKE_DEMAND(owning_subcontext != nullptr);
     // OK if initial_value is null here.
   }
 
@@ -510,8 +510,8 @@ class CacheEntryValue {
   // This is the post-copy cleanup method.
   void set_owning_subcontext(
       const internal::ContextMessageInterface* owning_subcontext) {
-    DRAKE_DEMAND(owning_subcontext != nullptr);
-    DRAKE_DEMAND(owning_subcontext_ == nullptr);
+    MALIPUT_DRAKE_DEMAND(owning_subcontext != nullptr);
+    MALIPUT_DRAKE_DEMAND(owning_subcontext_ == nullptr);
     owning_subcontext_ = owning_subcontext;
   }
 
@@ -656,7 +656,7 @@ class Cache {
   service of its owning subcontext. The supplied pointer must not be null. */
   explicit Cache(const internal::ContextMessageInterface* owning_subcontext)
       : owning_subcontext_(owning_subcontext) {
-    DRAKE_DEMAND(owning_subcontext != nullptr);
+    MALIPUT_DRAKE_DEMAND(owning_subcontext != nullptr);
   }
 
   /** Destruction deletes all cache entries and their contained values; no
@@ -683,7 +683,7 @@ class Cache {
   /** Returns true if there is a CacheEntryValue in this cache that has the
   given index. */
   bool has_cache_entry_value(CacheIndex index) const {
-    DRAKE_DEMAND(index.is_valid());
+    MALIPUT_DRAKE_DEMAND(index.is_valid());
     if (index >= cache_size()) return false;
     return store_[index] != nullptr;
   }
@@ -699,9 +699,9 @@ class Cache {
   if there is no CacheEntryValue with that index. Use has_cache_entry_value()
   first if you aren't sure. */
   const CacheEntryValue& get_cache_entry_value(CacheIndex index) const {
-    DRAKE_ASSERT(has_cache_entry_value(index));
+    MALIPUT_DRAKE_ASSERT(has_cache_entry_value(index));
     const CacheEntryValue& cache_value = *store_[index];
-    DRAKE_ASSERT(cache_value.cache_index() == index);
+    MALIPUT_DRAKE_ASSERT(cache_value.cache_index() == index);
     return cache_value;
   }
 

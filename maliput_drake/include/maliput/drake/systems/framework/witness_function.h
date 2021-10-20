@@ -134,7 +134,7 @@ class WitnessFunction final {
             return (calc_system->*calc)(context);
           },
           std::move(event)) {
-    DRAKE_DEMAND(dynamic_cast<const MySystem*>(system) != nullptr);
+    MALIPUT_DRAKE_DEMAND(dynamic_cast<const MySystem*>(system) != nullptr);
   }
 
   // See documentation for above constructor, which applies here without
@@ -149,13 +149,13 @@ class WitnessFunction final {
         description_(std::move(description)),
         direction_type_(direction), event_(std::move(event)),
         calc_function_(std::move(calc)) {
-    DRAKE_DEMAND(system != nullptr);
-    DRAKE_DEMAND(system_base != nullptr);
+    MALIPUT_DRAKE_DEMAND(system != nullptr);
+    MALIPUT_DRAKE_DEMAND(system_base != nullptr);
     // Check the precondition on identical parameters; note that comparing as
     // void* is only valid because we have single inheritance.
-    DRAKE_DEMAND(static_cast<const void*>(system) == system_base);
+    MALIPUT_DRAKE_DEMAND(static_cast<const void*>(system) == system_base);
     const bool has_calc = static_cast<bool>(calc_function_);
-    DRAKE_THROW_UNLESS(has_calc);
+    MALIPUT_DRAKE_THROW_UNLESS(has_calc);
     if (event_) {
       event_->set_trigger_type(TriggerType::kWitness);
     }
@@ -199,7 +199,7 @@ class WitnessFunction final {
         return ((w0 > zero && wf <= zero) ||
                 (w0 < zero && wf >= zero));
     }
-    DRAKE_UNREACHABLE();
+    MALIPUT_DRAKE_UNREACHABLE();
   }
 
   /// Gets the event that will be dispatched when the witness function

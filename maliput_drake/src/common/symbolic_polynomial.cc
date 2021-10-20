@@ -362,7 +362,7 @@ Polynomial::Polynomial(MapType init)
     : monomial_to_coefficient_map_{move(init)},
       indeterminates_{GetIndeterminates(monomial_to_coefficient_map_)},
       decision_variables_{GetDecisionVariables(monomial_to_coefficient_map_)} {
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
 };
 
 Polynomial::Polynomial(const Monomial& m)
@@ -370,12 +370,12 @@ Polynomial::Polynomial(const Monomial& m)
       indeterminates_{m.GetVariables()},
       decision_variables_{} {
   // No need to call CheckInvariant() because the following should hold.
-  DRAKE_ASSERT(decision_variables().empty());
+  MALIPUT_DRAKE_ASSERT(decision_variables().empty());
 }
 
 Polynomial::Polynomial(const Expression& e) : Polynomial{e, e.GetVariables()} {
   // No need to call CheckInvariant() because the following should hold.
-  DRAKE_ASSERT(decision_variables().empty());
+  MALIPUT_DRAKE_ASSERT(decision_variables().empty());
 }
 
 Polynomial::Polynomial(const Expression& e, Variables indeterminates)
@@ -453,7 +453,7 @@ pair<int, Monomial> DifferentiateMonomial(const Monomial& m,
   }
   map<Variable, int> powers{m.get_powers()};
   auto it = powers.find(x);
-  DRAKE_ASSERT(it != powers.end() && it->second >= 1);
+  MALIPUT_DRAKE_ASSERT(it != powers.end() && it->second >= 1);
   const int n{it->second--};
   if (it->second == 0) {
     powers.erase(it);
@@ -578,7 +578,7 @@ Polynomial& Polynomial::operator+=(const Polynomial& p) {
   }
   indeterminates_ += p.indeterminates();
   decision_variables_ += p.decision_variables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
@@ -638,7 +638,7 @@ Polynomial& Polynomial::operator*=(const Polynomial& p) {
   monomial_to_coefficient_map_ = std::move(new_map);
   indeterminates_ += p.indeterminates();
   decision_variables_ += p.decision_variables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
@@ -652,7 +652,7 @@ Polynomial& Polynomial::operator*=(const Monomial& m) {
   }
   monomial_to_coefficient_map_ = std::move(new_map);
   indeterminates_ += m.GetVariables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
@@ -747,13 +747,13 @@ Polynomial& Polynomial::AddProduct(const Expression& coeff, const Monomial& m) {
   DoAddProduct(coeff, m, &monomial_to_coefficient_map_);
   indeterminates_ += m.GetVariables();
   decision_variables_ += coeff.GetVariables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
 Polynomial Polynomial::RemoveTermsWithSmallCoefficients(
     double coefficient_tol) const {
-  DRAKE_DEMAND(coefficient_tol > 0);
+  MALIPUT_DRAKE_DEMAND(coefficient_tol > 0);
   MapType cleaned_polynomial{};
   for (const auto& term : monomial_to_coefficient_map_) {
     if (is_constant(term.second) &&
@@ -847,7 +847,7 @@ Polynomial pow(const Polynomial& p, int n) {
 
 MatrixX<Polynomial> Jacobian(const Eigen::Ref<const VectorX<Polynomial>>& f,
                              const Eigen::Ref<const VectorX<Variable>>& vars) {
-  DRAKE_DEMAND(vars.size() != 0);
+  MALIPUT_DRAKE_DEMAND(vars.size() != 0);
   const auto n{f.size()};
   const auto m{vars.size()};
   MatrixX<Polynomial> J(n, m);

@@ -168,8 +168,8 @@ class DecomposePolynomialVisitor {
       // Since we call e.Expand() before `Visit` function, `base` is already
       // expanded. If the variables in base intersect with indeterminates, then
       // it has to be a subset of indeterminates.
-      DRAKE_ASSERT(base.GetVariables().IsSubsetOf(indeterminates));
-      DRAKE_ASSERT(base.GetVariables().size() == 1);
+      MALIPUT_DRAKE_ASSERT(base.GetVariables().IsSubsetOf(indeterminates));
+      MALIPUT_DRAKE_ASSERT(base.GetVariables().size() == 1);
       return make_pair(MonomialBasisElement{get_variable(base), n}, 1.0);
     }
   }
@@ -354,7 +354,7 @@ GenericPolynomial<BasisElement>::GenericPolynomial(MapType init)
           GetIndeterminates<BasisElement>(basis_element_to_coefficient_map_)},
       decision_variables_{GetDecisionVariables<BasisElement>(
           basis_element_to_coefficient_map_)} {
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
 }
 
 template <typename BasisElement>
@@ -380,14 +380,14 @@ GenericPolynomial<BasisElement>::GenericPolynomial(const BasisElement& m)
       indeterminates_{m.GetVariables()},
       decision_variables_{} {
   // No need to call CheckInvariant() because the following should hold.
-  DRAKE_ASSERT(decision_variables().empty());
+  MALIPUT_DRAKE_ASSERT(decision_variables().empty());
 }
 
 template <typename BasisElement>
 GenericPolynomial<BasisElement>::GenericPolynomial(const Expression& e)
     : GenericPolynomial<BasisElement>{e, e.GetVariables()} {
   // No need to call CheckInvariant() because the following should hold.
-  DRAKE_ASSERT(decision_variables().empty());
+  MALIPUT_DRAKE_ASSERT(decision_variables().empty());
 }
 
 template <typename BasisElement>
@@ -536,7 +536,7 @@ GenericPolynomial<BasisElement>& GenericPolynomial<BasisElement>::operator+=(
   }
   indeterminates_ += p.indeterminates();
   decision_variables_ += p.decision_variables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
@@ -623,7 +623,7 @@ GenericPolynomial<BasisElement>& GenericPolynomial<BasisElement>::operator*=(
   basis_element_to_coefficient_map_ = std::move(new_map);
   indeterminates_ += p.indeterminates();
   decision_variables_ += p.decision_variables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
@@ -641,7 +641,7 @@ GenericPolynomial<BasisElement>& GenericPolynomial<BasisElement>::operator*=(
   }
   basis_element_to_coefficient_map_ = std::move(new_map);
   indeterminates_ += m.GetVariables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
@@ -684,7 +684,7 @@ GenericPolynomial<BasisElement>& GenericPolynomial<BasisElement>::AddProduct(
   DoAddProduct(coeff, m, &basis_element_to_coefficient_map_);
   indeterminates_ += m.GetVariables();
   decision_variables_ += coeff.GetVariables();
-  DRAKE_ASSERT_VOID(CheckInvariant());
+  MALIPUT_DRAKE_ASSERT_VOID(CheckInvariant());
   return *this;
 }
 
@@ -692,7 +692,7 @@ template <typename BasisElement>
 GenericPolynomial<BasisElement>
 GenericPolynomial<BasisElement>::RemoveTermsWithSmallCoefficients(
     double coefficient_tol) const {
-  DRAKE_DEMAND(coefficient_tol >= 0);
+  MALIPUT_DRAKE_DEMAND(coefficient_tol >= 0);
   MapType cleaned_polynomial{};
   for (const auto& [basis_element, coeff] : basis_element_to_coefficient_map_) {
     if (is_constant(coeff) &&

@@ -97,7 +97,7 @@ class Context : public ContextBase {
   /// were muxed).
   /// @throws std::exception if the system contains any abstract state.
   int num_total_states() const {
-    DRAKE_THROW_UNLESS(num_abstract_states() == 0);
+    MALIPUT_DRAKE_THROW_UNLESS(num_abstract_states() == 0);
     int count = num_continuous_states();
     for (int i = 0; i < num_discrete_state_groups(); i++)
       count += get_discrete_state(i).size();
@@ -735,7 +735,7 @@ class Context : public ContextBase {
   /// invalidation notifications. Use get_mutable_parameters() instead for
   /// normal access.
   static Parameters<T>& access_mutable_parameters(Context<T>* context) {
-    DRAKE_ASSERT(context != nullptr);
+    MALIPUT_DRAKE_ASSERT(context != nullptr);
     return *context->parameters_;
   }
 
@@ -743,7 +743,7 @@ class Context : public ContextBase {
   /// invalidation notifications. Use get_mutable_state() instead for normal
   /// access.
   static State<T>& access_mutable_state(Context<T>* context) {
-    DRAKE_ASSERT(context != nullptr);
+    MALIPUT_DRAKE_ASSERT(context != nullptr);
     return context->do_access_mutable_state();
   }
 

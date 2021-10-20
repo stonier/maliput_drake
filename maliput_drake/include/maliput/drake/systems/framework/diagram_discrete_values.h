@@ -40,7 +40,7 @@ class DiagramDiscreteValues final: public DiscreteValues<T> {
   explicit DiagramDiscreteValues(std::vector<DiscreteValues<T>*> subdiscretes)
       : DiscreteValues<T>(Flatten(subdiscretes)),
         subdiscretes_(std::move(subdiscretes)) {
-    DRAKE_ASSERT(internal::IsNonNull(subdiscretes_));
+    MALIPUT_DRAKE_ASSERT(internal::IsNonNull(subdiscretes_));
   }
 
   /// Constructs a DiagramDiscreteValues object that is composed (recursively)
@@ -49,7 +49,7 @@ class DiagramDiscreteValues final: public DiscreteValues<T> {
       std::vector<std::unique_ptr<DiscreteValues<T>>> owned_subdiscretes)
       : DiagramDiscreteValues<T>(internal::Unpack(owned_subdiscretes)) {
     owned_subdiscretes_ = std::move(owned_subdiscretes);
-    DRAKE_ASSERT(internal::IsNonNull(owned_subdiscretes_));
+    MALIPUT_DRAKE_ASSERT(internal::IsNonNull(owned_subdiscretes_));
   }
 
   /// Destructor deletes any owned DiscreteValues objects but does nothing if
@@ -76,8 +76,8 @@ class DiagramDiscreteValues final: public DiscreteValues<T> {
   /// Returns a const reference to one of the referenced DiscreteValues
   /// objects which may or may not be owned locally.
   const DiscreteValues<T>& get_subdiscrete(SubsystemIndex index) const {
-    DRAKE_DEMAND(0 <= index && index < num_subdiscretes());
-    DRAKE_DEMAND(subdiscretes_[index] != nullptr);
+    MALIPUT_DRAKE_DEMAND(0 <= index && index < num_subdiscretes());
+    MALIPUT_DRAKE_DEMAND(subdiscretes_[index] != nullptr);
     return *subdiscretes_[index];
   }
 

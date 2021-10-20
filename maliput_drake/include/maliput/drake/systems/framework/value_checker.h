@@ -16,7 +16,7 @@ namespace internal {
 /// Checks some BasicVector invariants on @p basic_vector.
 ///
 /// Because this function uses shady implementation tricks, it should ONLY be
-/// called from within DRAKE_ASSERT_VOID or unit test code.
+/// called from within MALIPUT_DRAKE_ASSERT_VOID or unit test code.
 ///
 /// This function is likely to be expensive (on the order of a full copy), so
 /// should be used sparingly.  In particular, only a few select locations
@@ -25,10 +25,10 @@ namespace internal {
 /// @throws std::exception if invariants are violated or basic_vector is nullptr
 template <typename T>
 void CheckBasicVectorInvariants(const BasicVector<T>* basic_vector) {
-  DRAKE_THROW_UNLESS(basic_vector != nullptr);
+  MALIPUT_DRAKE_THROW_UNLESS(basic_vector != nullptr);
   std::unique_ptr<BasicVector<T>> cloned_base = basic_vector->Clone();
   const BasicVector<T>* const cloned_vector = cloned_base.get();
-  DRAKE_THROW_UNLESS(cloned_vector != nullptr);
+  MALIPUT_DRAKE_THROW_UNLESS(cloned_vector != nullptr);
   const auto& original_type = typeid(*basic_vector);
   const auto& cloned_type = typeid(*cloned_vector);
   if (original_type != cloned_type) {
@@ -44,7 +44,7 @@ void CheckBasicVectorInvariants(const BasicVector<T>* basic_vector) {
 /// BasicVector invariants.  Otherwise, does nothing.
 ///
 /// Because this function uses shady implementation tricks, it should ONLY be
-/// called from within DRAKE_ASSERT_VOID or unit test code.
+/// called from within MALIPUT_DRAKE_ASSERT_VOID or unit test code.
 ///
 /// This function is likely to be expensive (on the order of a full copy), so
 /// should be used sparingly.  In particular, only a few select locations
@@ -57,7 +57,7 @@ void CheckBasicVectorInvariants(const BasicVector<T>* basic_vector) {
 /// nullptr
 template <typename T>
 void CheckVectorValueInvariants(const AbstractValue* abstract_value) {
-  DRAKE_THROW_UNLESS(abstract_value != nullptr);
+  MALIPUT_DRAKE_THROW_UNLESS(abstract_value != nullptr);
   const auto* const basic_vector =
       abstract_value->maybe_get_value<BasicVector<T>>();
   if (basic_vector != nullptr) {

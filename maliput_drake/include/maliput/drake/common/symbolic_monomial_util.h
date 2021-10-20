@@ -106,7 +106,7 @@ namespace internal {
 template <typename MonomialOrder>
 void AddMonomialsOfDegreeN(const Variables& vars, int degree, const Monomial& b,
                            std::set<Monomial, MonomialOrder>* const bin) {
-  DRAKE_ASSERT(!vars.empty());
+  MALIPUT_DRAKE_ASSERT(!vars.empty());
   if (degree == 0) {
     bin->insert(b);
     return;
@@ -140,8 +140,8 @@ template <int rows>
 Eigen::Matrix<Monomial, rows, 1> ComputeMonomialBasis(
     const Variables& vars, int degree,
     DegreeType degree_type = DegreeType::kAny) {
-  DRAKE_DEMAND(!vars.empty());
-  DRAKE_DEMAND(degree >= 0);
+  MALIPUT_DRAKE_DEMAND(!vars.empty());
+  MALIPUT_DRAKE_DEMAND(degree >= 0);
   // 1. Collect monomials.
   std::set<Monomial, GradedReverseLexOrder<std::less<Variable>>> monomials;
   int start_degree = 0;
@@ -166,7 +166,7 @@ Eigen::Matrix<Monomial, rows, 1> ComputeMonomialBasis(
     AddMonomialsOfDegreeN(vars, i, Monomial{}, &monomials);
   }
   // 2. Prepare the return value, basis.
-  DRAKE_DEMAND((rows == Eigen::Dynamic) ||
+  MALIPUT_DRAKE_DEMAND((rows == Eigen::Dynamic) ||
                (static_cast<size_t>(rows) == monomials.size()));
   Eigen::Matrix<Monomial, rows, 1> basis(monomials.size());
   size_t i{0};
@@ -211,7 +211,7 @@ Eigen::Matrix<Monomial, NChooseK(n + degree, degree), 1> MonomialBasis(
     const Variables& vars) {
   static_assert(n > 0, "n should be a positive integer.");
   static_assert(degree >= 0, "degree should be a non-negative integer.");
-  DRAKE_ASSERT(vars.size() == n);
+  MALIPUT_DRAKE_ASSERT(vars.size() == n);
   return internal::ComputeMonomialBasis<NChooseK(n + degree, degree)>(vars,
                                                                       degree);
 }

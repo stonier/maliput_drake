@@ -16,7 +16,7 @@ namespace {
 std::map<Variable, int> ToVarToDegreeMap(
     const Eigen::Ref<const VectorX<Variable>>& vars,
     const Eigen::Ref<const Eigen::VectorXi>& exponents) {
-  DRAKE_DEMAND(vars.size() == exponents.size());
+  MALIPUT_DRAKE_DEMAND(vars.size() == exponents.size());
   std::map<Variable, int> powers;
   for (int i = 0; i < vars.size(); ++i) {
     if (powers.count(vars[i]) > 0) {
@@ -119,7 +119,7 @@ bool PolynomialBasisElement::operator!=(
 
 bool PolynomialBasisElement::lexicographical_compare(
     const PolynomialBasisElement& other) const {
-  DRAKE_ASSERT(typeid(*this) == typeid(other));
+  MALIPUT_DRAKE_ASSERT(typeid(*this) == typeid(other));
   return std::lexicographical_compare(
       var_to_degree_map_.begin(), var_to_degree_map_.end(),
       other.var_to_degree_map_.begin(), other.var_to_degree_map_.end(),
@@ -152,9 +152,9 @@ symbolic::Expression PolynomialBasisElement::ToExpression() const {
 void PolynomialBasisElement::DoEvaluatePartial(
     const Environment& env, double* coeff,
     std::map<Variable, int>* new_basis_element) const {
-  DRAKE_ASSERT(coeff != nullptr);
-  DRAKE_ASSERT(new_basis_element != nullptr);
-  DRAKE_ASSERT(new_basis_element->empty());
+  MALIPUT_DRAKE_ASSERT(coeff != nullptr);
+  MALIPUT_DRAKE_ASSERT(new_basis_element != nullptr);
+  MALIPUT_DRAKE_ASSERT(new_basis_element->empty());
   *coeff = 1;
   for (const auto& [var, degree] : var_to_degree_map_) {
     auto it = env.find(var);
@@ -168,7 +168,7 @@ void PolynomialBasisElement::DoEvaluatePartial(
 
 void PolynomialBasisElement::DoMergeBasisElementInPlace(
     const PolynomialBasisElement& other) {
-  DRAKE_ASSERT(typeid(*this) == typeid(other));
+  MALIPUT_DRAKE_ASSERT(typeid(*this) == typeid(other));
   auto it1 = this->var_to_degree_map_.begin();
   auto it2 = other.var_to_degree_map_.begin();
   while (it1 != this->var_to_degree_map_.end() &&

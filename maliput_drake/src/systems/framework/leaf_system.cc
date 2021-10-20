@@ -18,9 +18,9 @@ T GetNextSampleTime(
     const PeriodicEventData& attribute,
     const T& current_time_sec) {
   const double period = attribute.period_sec();
-  DRAKE_ASSERT(period > 0);
+  MALIPUT_DRAKE_ASSERT(period > 0);
   const double offset = attribute.offset_sec();
-  DRAKE_ASSERT(offset >= 0);
+  MALIPUT_DRAKE_ASSERT(offset >= 0);
 
   // If the first sample time hasn't arrived yet, then that is the next
   // sample time.
@@ -37,7 +37,7 @@ T GetNextSampleTime(
   if (next_t <= current_time_sec) {
     next_t = offset + (next_k + 1) * period;
   }
-  DRAKE_ASSERT(next_t > current_time_sec);
+  MALIPUT_DRAKE_ASSERT(next_t > current_time_sec);
   return next_t;
 }
 
@@ -143,7 +143,7 @@ template <typename T>
 void LeafSystem<T>::SetDefaultState(
     const Context<T>& context, State<T>* state) const {
   this->ValidateContext(context);
-  DRAKE_DEMAND(state != nullptr);
+  MALIPUT_DRAKE_DEMAND(state != nullptr);
   this->ValidateCreatedForThisSystem(state);
   ContinuousState<T>& xc = state->get_mutable_continuous_state();
   xc.SetFromVector(model_continuous_state_vector_->get_value());
@@ -151,7 +151,7 @@ void LeafSystem<T>::SetDefaultState(
   DiscreteValues<T>& xd = state->get_mutable_discrete_state();
 
   // Check that _if_ we have models, there is one for each group.
-  DRAKE_DEMAND(model_discrete_state_.num_groups() == 0 ||
+  MALIPUT_DRAKE_DEMAND(model_discrete_state_.num_groups() == 0 ||
       model_discrete_state_.num_groups() == xd.num_groups());
 
   if (model_discrete_state_.num_groups() > 0) {
@@ -242,7 +242,7 @@ std::multimap<int, int> LeafSystem<T>::GetDirectFeedthroughs() const {
   // A helper function that removes an item from `unknown`.
   const auto remove_unknown = [&unknown](const auto& in_out_pair) {
     const auto num_erased = unknown.erase(in_out_pair);
-    DRAKE_DEMAND(num_erased == 1);
+    MALIPUT_DRAKE_DEMAND(num_erased == 1);
   };
 
   // A helper function that adds this in/out pair to the feedthrough result.
@@ -257,7 +257,7 @@ std::multimap<int, int> LeafSystem<T>::GetDirectFeedthroughs() const {
   for (const auto& input_output : orig_unknown) {
     // Get the CacheEntry associated with the output port in this pair.
     const auto& output = this->get_output_port(input_output.second);
-    DRAKE_ASSERT(typeid(output) == typeid(LeafOutputPort<T>));
+    MALIPUT_DRAKE_ASSERT(typeid(output) == typeid(LeafOutputPort<T>));
     const auto& leaf_output = static_cast<const LeafOutputPort<T>&>(output);
     const auto& cache_entry = leaf_output.cache_entry();
 
@@ -347,7 +347,7 @@ std::unique_ptr<LeafContext<T>> LeafSystem<T>::DoMakeLeafContext() const {
 template <typename T>
 T LeafSystem<T>::DoCalcWitnessValue(
     const Context<T>& context, const WitnessFunction<T>& witness_func) const {
-  DRAKE_DEMAND(this == &witness_func.get_system());
+  MALIPUT_DRAKE_DEMAND(this == &witness_func.get_system());
   return witness_func.CalcWitnessValue(context);
 }
 
@@ -355,11 +355,11 @@ template <typename T>
 void LeafSystem<T>::AddTriggeredWitnessFunctionToCompositeEventCollection(
     Event<T>* event,
     CompositeEventCollection<T>* events) const {
-  DRAKE_DEMAND(event != nullptr);
-  DRAKE_DEMAND(event->get_event_data() != nullptr);
-  DRAKE_DEMAND(dynamic_cast<const WitnessTriggeredEventData<T>*>(
+  MALIPUT_DRAKE_DEMAND(event != nullptr);
+  MALIPUT_DRAKE_DEMAND(event->get_event_data() != nullptr);
+  MALIPUT_DRAKE_DEMAND(dynamic_cast<const WitnessTriggeredEventData<T>*>(
       event->get_event_data()) != nullptr);
-  DRAKE_DEMAND(events != nullptr);
+  MALIPUT_DRAKE_DEMAND(events != nullptr);
   event->AddToComposite(events);
 }
 
@@ -443,7 +443,7 @@ template <typename T>
 void LeafSystem<T>::GetGraphvizInputPortToken(
     const InputPort<T>& port, int max_depth, std::stringstream* dot) const {
   unused(max_depth);
-  DRAKE_DEMAND(&port.get_system() == this);
+  MALIPUT_DRAKE_DEMAND(&port.get_system() == this);
   *dot << this->GetGraphvizId() << ":u" << port.get_index();
 }
 
@@ -451,14 +451,14 @@ template <typename T>
 void LeafSystem<T>::GetGraphvizOutputPortToken(
     const OutputPort<T>& port, int max_depth, std::stringstream* dot) const {
   unused(max_depth);
-  DRAKE_DEMAND(&port.get_system() == this);
+  MALIPUT_DRAKE_DEMAND(&port.get_system() == this);
   *dot << this->GetGraphvizId() << ":y" << port.get_index();
 }
 
 template <typename T>
 std::unique_ptr<ContinuousState<T>> LeafSystem<T>::AllocateContinuousState()
     const {
-  DRAKE_DEMAND(model_continuous_state_vector_->size() ==
+  MALIPUT_DRAKE_DEMAND(model_continuous_state_vector_->size() ==
                this->num_continuous_states());
   const SystemBase::ContextSizes& sizes = this->get_context_sizes();
   auto result = std::make_unique<ContinuousState<T>>(
@@ -487,14 +487,14 @@ std::unique_ptr<Parameters<T>> LeafSystem<T>::AllocateParameters() const {
   numeric_params.reserve(model_numeric_parameters_.size());
   for (int i = 0; i < model_numeric_parameters_.size(); ++i) {
     auto param = model_numeric_parameters_.CloneVectorModel<T>(i);
-    DRAKE_ASSERT(param != nullptr);
+    MALIPUT_DRAKE_ASSERT(param != nullptr);
     numeric_params.emplace_back(std::move(param));
   }
   std::vector<std::unique_ptr<AbstractValue>> abstract_params;
   abstract_params.reserve(model_abstract_parameters_.size());
   for (int i = 0; i < model_abstract_parameters_.size(); ++i) {
     auto param = model_abstract_parameters_.CloneModel(i);
-    DRAKE_ASSERT(param != nullptr);
+    MALIPUT_DRAKE_ASSERT(param != nullptr);
     abstract_params.emplace_back(std::move(param));
   }
   auto result = std::make_unique<Parameters<T>>(std::move(numeric_params),
@@ -569,7 +569,7 @@ ContinuousStateIndex LeafSystem<T>::DeclareContinuousState(
 template <typename T>
 ContinuousStateIndex LeafSystem<T>::DeclareContinuousState(
     const BasicVector<T>& model_vector, int num_q, int num_v, int num_z) {
-  DRAKE_DEMAND(model_vector.size() == num_q + num_v + num_z);
+  MALIPUT_DRAKE_DEMAND(model_vector.size() == num_q + num_v + num_z);
   model_continuous_state_vector_ = model_vector.Clone();
 
   // Note that only the last DeclareContinuousState() takes effect;
@@ -614,7 +614,7 @@ DiscreteStateIndex LeafSystem<T>::DeclareDiscreteState(
 template <typename T>
 DiscreteStateIndex LeafSystem<T>::DeclareDiscreteState(
     int num_state_variables) {
-  DRAKE_DEMAND(num_state_variables >= 0);
+  MALIPUT_DRAKE_DEMAND(num_state_variables >= 0);
   return DeclareDiscreteState(VectorX<T>::Zero(num_state_variables));
 }
 
@@ -712,8 +712,8 @@ template <typename T>
 LeafOutputPort<T>& LeafSystem<T>::DeclareStateOutputPort(
     std::variant<std::string, UseDefaultName> name,
     ContinuousStateIndex state_index) {
-  DRAKE_THROW_UNLESS(state_index.is_valid());
-  DRAKE_THROW_UNLESS(state_index == 0);
+  MALIPUT_DRAKE_THROW_UNLESS(state_index.is_valid());
+  MALIPUT_DRAKE_THROW_UNLESS(state_index == 0);
   return DeclareVectorOutputPort(
       std::move(name), *model_continuous_state_vector_,
       [](const Context<T>& context, BasicVector<T>* output) {
@@ -740,9 +740,9 @@ template <typename T>
 LeafOutputPort<T>& LeafSystem<T>::DeclareStateOutputPort(
     std::variant<std::string, UseDefaultName> name,
     AbstractStateIndex state_index) {
-  DRAKE_THROW_UNLESS(state_index.is_valid());
-  DRAKE_THROW_UNLESS(state_index >= 0);
-  DRAKE_THROW_UNLESS(state_index < this->model_abstract_states_.size());
+  MALIPUT_DRAKE_THROW_UNLESS(state_index.is_valid());
+  MALIPUT_DRAKE_THROW_UNLESS(state_index >= 0);
+  MALIPUT_DRAKE_THROW_UNLESS(state_index < this->model_abstract_states_.size());
   return DeclareAbstractOutputPort(
       std::move(name),
       [this, state_index]() {
@@ -885,7 +885,7 @@ void LeafSystem<T>::DispatchPublishHandler(
   const LeafEventCollection<PublishEvent<T>>& leaf_events =
      dynamic_cast<const LeafEventCollection<PublishEvent<T>>&>(events);
   // Only call DoPublish if there are publish events.
-  DRAKE_DEMAND(leaf_events.HasEvents());
+  MALIPUT_DRAKE_DEMAND(leaf_events.HasEvents());
   this->DoPublish(context, leaf_events.get_events());
 }
 
@@ -897,7 +897,7 @@ void LeafSystem<T>::DispatchDiscreteVariableUpdateHandler(
   const LeafEventCollection<DiscreteUpdateEvent<T>>& leaf_events =
       dynamic_cast<const LeafEventCollection<DiscreteUpdateEvent<T>>&>(
           events);
-  DRAKE_DEMAND(leaf_events.HasEvents());
+  MALIPUT_DRAKE_DEMAND(leaf_events.HasEvents());
 
   // Must initialize the output argument with the current contents of the
   // discrete state.
@@ -910,10 +910,10 @@ template <typename T>
 void LeafSystem<T>::DoApplyDiscreteVariableUpdate(
     const EventCollection<DiscreteUpdateEvent<T>>& events,
     DiscreteValues<T>* discrete_state, Context<T>* context) const {
-  DRAKE_ASSERT(
+  MALIPUT_DRAKE_ASSERT(
       dynamic_cast<const LeafEventCollection<DiscreteUpdateEvent<T>>*>(
           &events) != nullptr);
-  DRAKE_DEMAND(events.HasEvents());
+  MALIPUT_DRAKE_DEMAND(events.HasEvents());
   // TODO(sherm1) Should swap rather than copy.
   context->get_mutable_discrete_state().SetFrom(*discrete_state);
 }
@@ -926,7 +926,7 @@ void LeafSystem<T>::DispatchUnrestrictedUpdateHandler(
   const LeafEventCollection<UnrestrictedUpdateEvent<T>>& leaf_events =
       dynamic_cast<const LeafEventCollection<UnrestrictedUpdateEvent<T>>&>(
           events);
-  DRAKE_DEMAND(leaf_events.HasEvents());
+  MALIPUT_DRAKE_DEMAND(leaf_events.HasEvents());
 
   // Must initialize the output argument with the current contents of the
   // state.
@@ -939,10 +939,10 @@ template <typename T>
 void LeafSystem<T>::DoApplyUnrestrictedUpdate(
     const EventCollection<UnrestrictedUpdateEvent<T>>& events,
     State<T>* state, Context<T>* context) const {
-  DRAKE_ASSERT(
+  MALIPUT_DRAKE_ASSERT(
       dynamic_cast<const LeafEventCollection<UnrestrictedUpdateEvent<T>>*>(
           &events) != nullptr);
-  DRAKE_DEMAND(events.HasEvents());
+  MALIPUT_DRAKE_DEMAND(events.HasEvents());
   // TODO(sherm1) Should swap rather than copy.
   context->get_mutable_state().SetFrom(*state);
 }
@@ -1019,7 +1019,7 @@ LeafOutputPort<T>& LeafSystem<T>::CreateCachedLeafOutputPort(
     std::string name, const std::optional<int>& fixed_size,
     ValueProducer value_producer,
     std::set<DependencyTicket> calc_prerequisites) {
-  DRAKE_DEMAND(!calc_prerequisites.empty());
+  MALIPUT_DRAKE_DEMAND(!calc_prerequisites.empty());
   // Create a cache entry for this output port.
   const OutputPortIndex oport_index(this->num_output_ports());
   CacheEntry& cache_entry = this->DeclareCacheEntry(

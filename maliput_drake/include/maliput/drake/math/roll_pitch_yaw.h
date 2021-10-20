@@ -466,7 +466,7 @@ class RollPitchYaw {
   // @param[out] R_y ∂R/∂y Partial derivative of `R` with respect to yaw `y`.
   void CalcRotationMatrixDrDpDy(Matrix3<T>* R_r, Matrix3<T>* R_p,
                                 Matrix3<T>* R_y) const {
-    DRAKE_ASSERT(R_r != nullptr && R_p != nullptr && R_y != nullptr);
+    MALIPUT_DRAKE_ASSERT(R_r != nullptr && R_p != nullptr && R_y != nullptr);
     const T& r = roll_angle();
     const T& p = pitch_angle();
     const T& y = yaw_angle();
@@ -606,7 +606,7 @@ class RollPitchYaw {
   // @param[in] rpy allegedly valid roll-pitch-yaw angles.
   // @throws std::exception in debug builds if rpy fails IsValid(rpy).
   RollPitchYaw<T>& SetOrThrowIfNotValidInDebugBuild(const Vector3<T>& rpy) {
-    DRAKE_ASSERT_VOID(ThrowIfNotValid(rpy));
+    MALIPUT_DRAKE_ASSERT_VOID(ThrowIfNotValid(rpy));
     roll_pitch_yaw_ = rpy;
     return *this;
   }

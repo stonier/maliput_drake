@@ -33,7 +33,7 @@ Variable::Variable(string name, const Type type)
     : id_{get_next_id()},
       type_{type},
       name_{make_shared<const string>(move(name))} {
-  DRAKE_ASSERT(id_ > 0);
+  MALIPUT_DRAKE_ASSERT(id_ > 0);
 }
 Variable::Id Variable::get_id() const { return id_; }
 Variable::Type Variable::get_type() const { return type_; }
@@ -66,7 +66,7 @@ ostream& operator<<(ostream& os, Variable::Type type) {
     case Variable::Type::RANDOM_EXPONENTIAL:
       return os << "Random Exponential";
   }
-  DRAKE_UNREACHABLE();
+  MALIPUT_DRAKE_UNREACHABLE();
 }
 
 MatrixX<Variable> MakeMatrixVariable(const int rows, const int cols,
