@@ -2,8 +2,8 @@
 Changelog for package maliput_drake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.0 (2022-06-10)
+------------------
 * Moves package to root. (`#22 <https://github.com/maliput/maliput_drake/issues/22>`_)
 * Updates license. (`#21 <https://github.com/maliput/maliput_drake/issues/21>`_)
 * Uses ament_export_targets. (`#20 <https://github.com/maliput/maliput_drake/issues/20>`_)
