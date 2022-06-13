@@ -2,8 +2,8 @@
 Changelog for package maliput_drake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.1 (2022-06-13)
+------------------
 * Fixes include folder installation. (`#23 <https://github.com/maliput/maliput_drake/issues/23>`_)
 * Contributors: Franco Cipollone
 
