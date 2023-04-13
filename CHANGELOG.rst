@@ -2,8 +2,8 @@
 Changelog for package maliput_drake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.2 (2023-04-13)
+------------------
 * Improves README. (`#25 <https://github.com/maliput/maliput_drake/issues/25>`_)
 * Contributors: Franco Cipollone
 
