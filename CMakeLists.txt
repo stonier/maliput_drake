@@ -15,7 +15,7 @@ find_package(ament_cmake REQUIRED)
 
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3)
-find_package(fmt 6.1.2 EXACT REQUIRED)
+find_package(fmt EXACT REQUIRED)
 
 ##############################################################################
 # Project Configuration
