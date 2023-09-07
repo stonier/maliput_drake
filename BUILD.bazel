@@ -1,0 +1,11 @@
+cc_library(
+    name = "maliput_drake",
+    srcs = glob(["src/**/*.cc"]),
+    hdrs = glob(["include/**/*.h"]),
+    strip_include_prefix = "include",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@eigen",
+        "@fmt",
+    ],
+)
