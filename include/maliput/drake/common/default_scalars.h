@@ -78,7 +78,6 @@
 #define DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS( \
     SomeType) \
 template SomeType<double>; \
-template SomeType<::maliput::drake::AutoDiffXd>; \
 template SomeType<::maliput::drake::symbolic::Expression>;
 
 /// Defines template instantiations for Drake's default nonsymbolic scalars.
@@ -86,15 +85,13 @@ template SomeType<::maliput::drake::symbolic::Expression>;
 #define \
   DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_NONSYMBOLIC_SCALARS( \
       SomeType) \
-template SomeType<double>; \
-template SomeType<::maliput::drake::AutoDiffXd>;
+template SomeType<double>;
 
 /// Declares that template instantiations exist for Drake's default scalars.
 /// This should only be used in .h files, never in .cc files.
 #define DRAKE_DECLARE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(  \
     SomeType) \
 extern template SomeType<double>; \
-extern template SomeType<::maliput::drake::AutoDiffXd>; \
 extern template SomeType<::maliput::drake::symbolic::Expression>;
 
 /// Declares that template instantiations exist for Drake's default nonsymbolic
@@ -103,7 +100,6 @@ extern template SomeType<::maliput::drake::symbolic::Expression>;
   DRAKE_DECLARE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_NONSYMBOLIC_SCALARS( \
       SomeType) \
 extern template SomeType<double>; \
-extern template SomeType<::maliput::drake::AutoDiffXd>;
 
 /// @}
 
@@ -203,7 +199,6 @@ constexpr auto Make_Function_Pointers_Pack1() { \
 static constexpr auto Function_Femplates __attribute__((used)) = \
     Make_Function_Pointers_Pack1< \
         double, \
-        ::maliput::drake::AutoDiffXd, \
         ::maliput::drake::symbolic::Expression>();
 
 /// Defines template instantiations for Drake's default nonsymbolic scalars.
@@ -224,8 +219,6 @@ constexpr auto Make_Function_Pointers_Nonsym_Pack1() { \
   return std::tuple_cat(Make_Function_Pointers_Nonsym_Pack2<Ts, Ts...>()...); \
 } \
 static constexpr auto Function_Templates_Nonsym __attribute__((used)) = \
-    Make_Function_Pointers_Nonsym_Pack1< \
-        double, \
-        ::maliput::drake::AutoDiffXd>();
+    Make_Function_Pointers_Nonsym_Pack1<double>();
 
 /// @}
