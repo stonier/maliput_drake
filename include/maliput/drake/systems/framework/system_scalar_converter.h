@@ -7,7 +7,6 @@
 #include <unordered_map>
 #include <utility>
 
-// #include "maliput/drake/common/autodiff.h"
 #include "maliput/drake/common/drake_assert.h"
 #include "maliput/drake/common/drake_copyable.h"
 #include "maliput/drake/common/drake_deprecated.h"

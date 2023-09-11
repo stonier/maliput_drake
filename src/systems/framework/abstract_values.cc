@@ -2,8 +2,6 @@
 
 #include <utility>
 
-// #include "maliput/drake/common/autodiff.h"
-
 namespace maliput::drake {
 namespace systems {
 

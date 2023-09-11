@@ -8,7 +8,6 @@
 
 #include <fmt/format.h>
 
-// #include "maliput/drake/common/autodiff.h"
 #include "maliput/drake/common/default_scalars.h"
 #include "maliput/drake/common/drake_assert.h"
 #include "maliput/drake/common/drake_deprecated.h"

@@ -1,6 +1,5 @@
 #include "maliput/drake/common/random.h"
 
-#include "maliput/drake/common/autodiff.h"
 
 namespace maliput::drake {
 template <typename T>
@@ -35,7 +34,5 @@ T CalcProbabilityDensity(RandomDistribution distribution,
 // here, once we can break the dependency cycle.
 template double CalcProbabilityDensity<double>(
     RandomDistribution, const Eigen::Ref<const VectorX<double>>&);
-template AutoDiffXd CalcProbabilityDensity<AutoDiffXd>(
-    RandomDistribution, const Eigen::Ref<const VectorX<AutoDiffXd>>&);
 }  // namespace maliput::drake
 
