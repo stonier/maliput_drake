@@ -10,7 +10,7 @@
 #include <vector>
 
 #include <Eigen/Core>
-#include <unsupported/Eigen/Polynomials>
+// #include <unsupported/Eigen/Polynomials>
 
 #include "maliput/drake/common/autodiff.h"
 #include "maliput/drake/common/default_scalars.h"

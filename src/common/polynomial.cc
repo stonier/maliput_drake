@@ -545,9 +545,11 @@ typename Polynomial<T>::RootsType Polynomial<T>::Roots() const {
         return ret;
       }
       default: {
-        Eigen::PolynomialSolver<RealScalar, Eigen::Dynamic> solver;
-        solver.compute(coefficients);
-        return solver.roots();
+        throw std::runtime_error(
+            "Polynomial<T>::Roots() removed unsupported/Eigen/Polynomial .");
+        // Eigen::PolynomialSolver<RealScalar, Eigen::Dynamic> solver;
+        // solver.compute(coefficients);
+        // return solver.roots();
       }
     }
   } else {
