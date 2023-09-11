@@ -1,4 +1,5 @@
 #pragma once
+#define MALIPUT_USED
 
 #include <functional>
 #include <limits>
@@ -6,7 +7,7 @@
 #include <string>
 #include <utility>
 
-#include "maliput/drake/common/autodiff.h"
+// #include "maliput/drake/common/autodiff.h"
 #include "maliput/drake/common/default_scalars.h"
 #include "maliput/drake/common/drake_assert.h"
 #include "maliput/drake/common/drake_bool.h"
@@ -312,14 +313,14 @@ class ExternalSystemConstraint final {
   ExternalSystemConstraint(
       std::string description,
       SystemConstraintBounds bounds,
-      SystemConstraintCalc<double> calc_double,
-      SystemConstraintCalc<AutoDiffXd> calc_autodiffxd = {},
-      SystemConstraintCalc<symbolic::Expression> calc_expression = {})
+      SystemConstraintCalc<double> calc_double)
+      // SystemConstraintCalc<AutoDiffXd> calc_autodiffxd = {},
+      // SystemConstraintCalc<symbolic::Expression> calc_expression = {})
       : description_(std::move(description)),
         bounds_(std::move(bounds)),
-        calc_double_(std::move(calc_double)),
-        calc_autodiffxd_(std::move(calc_autodiffxd)),
-        calc_expression_(std::move(calc_expression)) {}
+        calc_double_(std::move(calc_double)) {}
+        // calc_autodiffxd_(std::move(calc_autodiffxd)),
+        // calc_expression_(std::move(calc_expression)) {}
 
   /// Creates a constraint based on generic lambda.  This constraint will
   /// supply Calc functions for Drake's default scalar types.
@@ -377,8 +378,8 @@ class ExternalSystemConstraint final {
   std::string description_;
   SystemConstraintBounds bounds_;
   SystemConstraintCalc<double> calc_double_;
-  SystemConstraintCalc<AutoDiffXd> calc_autodiffxd_;
-  SystemConstraintCalc<symbolic::Expression> calc_expression_;
+  // SystemConstraintCalc<AutoDiffXd> calc_autodiffxd_;
+  // SystemConstraintCalc<symbolic::Expression> calc_expression_;
 };
 
 template <> inline
@@ -387,17 +388,17 @@ ExternalSystemConstraint::do_get_calc() const {
   return calc_double_;
 }
 
-template <> inline
-const SystemConstraintCalc<AutoDiffXd>&
-ExternalSystemConstraint::do_get_calc() const {
-  return calc_autodiffxd_;
-}
+// template <> inline
+// const SystemConstraintCalc<AutoDiffXd>&
+// ExternalSystemConstraint::do_get_calc() const {
+//   return calc_autodiffxd_;
+// }
 
-template <> inline
-const SystemConstraintCalc<symbolic::Expression>&
-ExternalSystemConstraint::do_get_calc() const {
-  return calc_expression_;
-}
+// template <> inline
+// const SystemConstraintCalc<symbolic::Expression>&
+// ExternalSystemConstraint::do_get_calc() const {
+//   return calc_expression_;
+// }
 
 }  // namespace systems
 }  // namespace maliput::drake

@@ -31,7 +31,6 @@ target_link_libraries(
     Eigen3::Eigen
     fmt::fmt
     maliput_drake::common
-    maliput_drake::math
     maliput_drake::framework
 )
 

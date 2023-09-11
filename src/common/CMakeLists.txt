@@ -2,7 +2,6 @@ add_library(common
   cond.cc
   double_overloads.cc
   drake_assert_and_throw.cc
-  drake_marker.cc
   hash.cc
   nice_type_name.cc
   nice_type_name_override.cc

@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 

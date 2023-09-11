@@ -1,5 +1,8 @@
 #pragma once
 
+
+#define MALIPUT_USED
+
 /**
 @file
 This is the entry point for all text logging within Drake.

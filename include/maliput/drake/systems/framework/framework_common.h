@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 #include <algorithm>
 #include <memory>
 #include <optional>

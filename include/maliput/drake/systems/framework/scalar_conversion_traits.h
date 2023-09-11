@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 #include <type_traits>
 
 #include "maliput/drake/common/symbolic.h"

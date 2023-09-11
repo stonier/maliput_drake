@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 #include <memory>
 #include <stdexcept>
 #include <string>

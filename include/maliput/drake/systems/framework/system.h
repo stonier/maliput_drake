@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 #include <cmath>
 #include <functional>
 #include <limits>
@@ -1065,7 +1067,7 @@ class System : public SystemBase {
 
   See @ref system_scalar_conversion for detailed background and examples
   related to scalar-type conversion support. */
-  std::unique_ptr<System<AutoDiffXd>> ToAutoDiffXd() const;
+  // std::unique_ptr<System<AutoDiffXd>> ToAutoDiffXd() const;
 
   /** Creates a deep copy of `from`, transmogrified to use the autodiff scalar
   type, with a dynamic-sized vector of partial derivatives.  The result is
@@ -1082,15 +1084,15 @@ class System : public SystemBase {
 
   See @ref system_scalar_conversion for detailed background and examples
   related to scalar-type conversion support. */
-  template <template <typename> class S = ::maliput::drake::systems::System>
-  static std::unique_ptr<S<AutoDiffXd>> ToAutoDiffXd(const S<T>& from) {
-    return System<T>::ToScalarType<AutoDiffXd>(from);
-  }
+  // template <template <typename> class S = ::maliput::drake::systems::System>
+  // static std::unique_ptr<S<AutoDiffXd>> ToAutoDiffXd(const S<T>& from) {
+  //   return System<T>::ToScalarType<AutoDiffXd>(from);
+  // }
 
   /** Creates a deep copy of this system exactly like ToAutoDiffXd(), but
   returns nullptr if this System does not support autodiff, instead of
   throwing an exception. */
-  std::unique_ptr<System<AutoDiffXd>> ToAutoDiffXdMaybe() const;
+  // std::unique_ptr<System<AutoDiffXd>> ToAutoDiffXdMaybe() const;
   //@}
 
   //----------------------------------------------------------------------------
@@ -1108,7 +1110,7 @@ class System : public SystemBase {
 
   See @ref system_scalar_conversion for detailed background and examples
   related to scalar-type conversion support. */
-  std::unique_ptr<System<symbolic::Expression>> ToSymbolic() const;
+  // std::unique_ptr<System<symbolic::Expression>> ToSymbolic() const;
 
   /** Creates a deep copy of `from`, transmogrified to use the symbolic scalar
   type. The result is never nullptr.
@@ -1124,15 +1126,15 @@ class System : public SystemBase {
 
   See @ref system_scalar_conversion for detailed background and examples
   related to scalar-type conversion support. */
-  template <template <typename> class S = ::maliput::drake::systems::System>
-  static std::unique_ptr<S<symbolic::Expression>> ToSymbolic(const S<T>& from) {
-    return System<T>::ToScalarType<symbolic::Expression>(from);
-  }
+  // template <template <typename> class S = ::maliput::drake::systems::System>
+  // static std::unique_ptr<S<symbolic::Expression>> ToSymbolic(const S<T>& from) {
+  //   return System<T>::ToScalarType<symbolic::Expression>(from);
+  // }
 
   /** Creates a deep copy of this system exactly like ToSymbolic(), but returns
   nullptr if this System does not support symbolic, instead of throwing an
   exception. */
-  std::unique_ptr<System<symbolic::Expression>> ToSymbolicMaybe() const;
+  // std::unique_ptr<System<symbolic::Expression>> ToSymbolicMaybe() const;
   //@}
 
   //----------------------------------------------------------------------------

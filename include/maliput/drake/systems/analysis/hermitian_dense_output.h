@@ -1,18 +1,21 @@
 #pragma once
 
+
+#define MALIPUT_USED
+
 #include <algorithm>
 #include <limits>
 #include <stdexcept>
 #include <utility>
 #include <vector>
 
-#include "maliput/drake/common/autodiff.h"
+// #include "maliput/drake/common/autodiff.h"
 #include "maliput/drake/common/default_scalars.h"
 #include "maliput/drake/common/drake_bool.h"
 #include "maliput/drake/common/drake_copyable.h"
 #include "maliput/drake/common/eigen_types.h"
 #include "maliput/drake/common/extract_double.h"
-#include "maliput/drake/common/symbolic.h"
+// #include "maliput/drake/common/symbolic.h"
 #include "maliput/drake/common/trajectories/piecewise_polynomial.h"
 #include "maliput/drake/systems/analysis/stepwise_dense_output.h"
 

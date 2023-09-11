@@ -1,4 +1,7 @@
 #pragma once
+
+#define MALIPUT_USED
+
 /// @file
 /// Provides public header files of Drake's symbolic library.
 /// A user of the symbolic library should only include this header file.

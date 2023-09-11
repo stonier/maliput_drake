@@ -1,5 +1,6 @@
 #pragma once
 
+#define MALIPUT_USED
 
 // N.B. `CommonScalarPack` and `NonSymbolicScalarPack` in `systems_pybind.h`
 // should be kept in sync with this file.

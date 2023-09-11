@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 // ============================================================================
 // N.B. The spelling of the macro names between doc/Doxyfile_CXX.in and this
 // file must be kept in sync!

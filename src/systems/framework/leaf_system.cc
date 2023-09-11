@@ -203,22 +203,22 @@ std::unique_ptr<DiscreteValues<T>> LeafSystem<T>::AllocateDiscreteVariables()
 
 namespace {
 
-template <typename T>
-std::unique_ptr<SystemSymbolicInspector> MakeSystemSymbolicInspector(
-    const System<T>& system) {
-  using symbolic::Expression;
+// template <typename T>
+// std::unique_ptr<SystemSymbolicInspector> MakeSystemSymbolicInspector(
+//     const System<T>& system) {
+  // using symbolic::Expression;
   // We use different implementations when T = Expression or not.
-  if constexpr (std::is_same_v<T, Expression>) {
-    return std::make_unique<SystemSymbolicInspector>(system);
-  } else {
-    std::unique_ptr<System<Expression>> converted = system.ToSymbolicMaybe();
-    if (converted) {
-      return std::make_unique<SystemSymbolicInspector>(*converted);
-    } else {
-      return nullptr;
-    }
-  }
-}
+  // if constexpr (std::is_same_v<T, Expression>) {
+  //   return std::make_unique<SystemSymbolicInspector>(system);
+  // } else {
+    // std::unique_ptr<System<Expression>> converted = system.ToSymbolicMaybe();
+    // if (converted) {
+    //   return std::make_unique<SystemSymbolicInspector>(*converted);
+    // } else {
+  //    return nullptr;
+    // }
+  // }
+// }
 
 }  // namespace
 
@@ -292,14 +292,14 @@ std::multimap<int, int> LeafSystem<T>::GetDirectFeedthroughs() const {
 
   // Otherwise, see if we can get a symbolic inspector to analyze them.
   // If not, we have to assume they are feedthrough.
-  auto inspector = MakeSystemSymbolicInspector(*this);
-  for (const auto& input_output : unknown) {
-    if (!inspector || inspector->IsConnectedInputToOutput(
-                          input_output.first, input_output.second)) {
-      add_to_feedthrough(input_output);
-    }
-    // No need to clean up the `unknown` set here.
-  }
+  // auto inspector = MakeSystemSymbolicInspector(*this);
+  // for (const auto& input_output : unknown) {
+  //   if (!inspector || inspector->IsConnectedInputToOutput(
+  //                         input_output.first, input_output.second)) {
+  //     add_to_feedthrough(input_output);
+  //   }
+  //   // No need to clean up the `unknown` set here.
+  // }
   return feedthrough;
 }
 

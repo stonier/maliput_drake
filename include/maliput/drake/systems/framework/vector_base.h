@@ -1,5 +1,8 @@
 #pragma once
 
+
+#define MALIPUT_USED
+
 #include <initializer_list>
 #include <ostream>
 #include <stdexcept>

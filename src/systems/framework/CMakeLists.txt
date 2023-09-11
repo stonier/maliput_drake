@@ -68,7 +68,6 @@ target_link_libraries(
     fmt::fmt
     Eigen3::Eigen
     maliput_drake::common
-    maliput_drake::math
 )
 
 install(

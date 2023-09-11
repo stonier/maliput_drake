@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 #include <memory>
 
 #include "maliput/drake/common/default_scalars.h"

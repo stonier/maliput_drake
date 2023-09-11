@@ -801,26 +801,26 @@ int64_t System<T>::GetGraphvizId() const {
   return reinterpret_cast<int64_t>(this);
 }
 
-template <typename T>
-std::unique_ptr<System<AutoDiffXd>> System<T>::ToAutoDiffXd() const {
-  return System<T>::ToAutoDiffXd(*this);
-}
+// template <typename T>
+// std::unique_ptr<System<AutoDiffXd>> System<T>::ToAutoDiffXd() const {
+//   return System<T>::ToAutoDiffXd(*this);
+// }
 
-template <typename T>
-std::unique_ptr<System<AutoDiffXd>> System<T>::ToAutoDiffXdMaybe() const {
-  return ToScalarTypeMaybe<AutoDiffXd>();
-}
+// template <typename T>
+// std::unique_ptr<System<AutoDiffXd>> System<T>::ToAutoDiffXdMaybe() const {
+//   return ToScalarTypeMaybe<AutoDiffXd>();
+// }
 
-template <typename T>
-std::unique_ptr<System<symbolic::Expression>> System<T>::ToSymbolic() const {
-  return System<T>::ToSymbolic(*this);
-}
+// template <typename T>
+// std::unique_ptr<System<symbolic::Expression>> System<T>::ToSymbolic() const {
+//   return System<T>::ToSymbolic(*this);
+// }
 
-template <typename T>
-std::unique_ptr<System<symbolic::Expression>>
-System<T>::ToSymbolicMaybe() const {
-  return ToScalarTypeMaybe<symbolic::Expression>();
-}
+// template <typename T>
+// std::unique_ptr<System<symbolic::Expression>>
+// System<T>::ToSymbolicMaybe() const {
+//   return ToScalarTypeMaybe<symbolic::Expression>();
+// }
 
 template <typename T>
 void System<T>::FixInputPortsFrom(const System<double>& other_system,

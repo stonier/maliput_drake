@@ -1,5 +1,7 @@
 #pragma once
 
+#define MALIPUT_USED
+
 /** @file
 Provides a portable macro for use in generating compile-time warnings for
 use of code that is permitted but discouraged. */

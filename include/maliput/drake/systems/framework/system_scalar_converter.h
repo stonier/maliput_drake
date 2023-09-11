@@ -1,4 +1,5 @@
 #pragma once
+#define MALIPUT_USED
 
 #include <memory>
 #include <typeindex>
@@ -6,7 +7,7 @@
 #include <unordered_map>
 #include <utility>
 
-#include "maliput/drake/common/autodiff.h"
+// #include "maliput/drake/common/autodiff.h"
 #include "maliput/drake/common/drake_assert.h"
 #include "maliput/drake/common/drake_copyable.h"
 #include "maliput/drake/common/drake_deprecated.h"
@@ -175,16 +176,16 @@ class SystemScalarConverter {
     // N.B. When changing the pairs of supported types below, be sure to also
     // change the `ConversionPairs` type pack in `DefineFrameworkPySystems`
     // and the factory function immediately below.
-    using Expression = symbolic::Expression;
+    // using Expression = symbolic::Expression;
     // From double to all other types.
-    MaybeAddConstructor<subtype_preservation, S, AutoDiffXd, double>();
-    MaybeAddConstructor<subtype_preservation, S, Expression, double>();
+    // MaybeAddConstructor<subtype_preservation, S, AutoDiffXd, double>();
+    // MaybeAddConstructor<subtype_preservation, S, Expression, double>();
     // From AutoDiffXd to all other types.
-    MaybeAddConstructor<subtype_preservation, S, double, AutoDiffXd>();
-    MaybeAddConstructor<subtype_preservation, S, Expression, AutoDiffXd>();
+    // MaybeAddConstructor<subtype_preservation, S, double, AutoDiffXd>();
+    // MaybeAddConstructor<subtype_preservation, S, Expression, AutoDiffXd>();
     // From Expression to all other types.
-    MaybeAddConstructor<subtype_preservation, S, double, Expression>();
-    MaybeAddConstructor<subtype_preservation, S, AutoDiffXd, Expression>();
+    // MaybeAddConstructor<subtype_preservation, S, double, Expression>();
+    // MaybeAddConstructor<subtype_preservation, S, AutoDiffXd, Expression>();
   }
 
   // Adds a converter for an S<U> into an S<T> using S's scalar-converting copy
