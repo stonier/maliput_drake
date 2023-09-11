@@ -8,6 +8,7 @@
 #include <Eigen/Core>
 
 #include "maliput/drake/common/default_scalars.h"
+#include "maliput/drake/common/drake_bool.h"
 #include "maliput/drake/common/trajectories/trajectory.h"
 
 namespace maliput::drake {

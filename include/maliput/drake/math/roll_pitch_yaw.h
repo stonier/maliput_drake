@@ -8,6 +8,7 @@
 
 #include "maliput/drake/common/default_scalars.h"
 #include "maliput/drake/common/drake_assert.h"
+#include "maliput/drake/common/drake_bool.h"
 #include "maliput/drake/common/drake_copyable.h"
 #include "maliput/drake/common/eigen_types.h"
 

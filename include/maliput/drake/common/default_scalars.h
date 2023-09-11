@@ -1,7 +1,5 @@
 #pragma once
 
-#include "maliput/drake/common/autodiff.h"
-#include "maliput/drake/common/symbolic.h"
 
 // N.B. `CommonScalarPack` and `NonSymbolicScalarPack` in `systems_pybind.h`
 // should be kept in sync with this file.
@@ -77,8 +75,7 @@
 /// This should only be used in .cc files, never in .h files.
 #define DRAKE_DEFINE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS( \
     SomeType) \
-template SomeType<double>; \
-template SomeType<::maliput::drake::symbolic::Expression>;
+template SomeType<double>;
 
 /// Defines template instantiations for Drake's default nonsymbolic scalars.
 /// This should only be used in .cc files, never in .h files.
@@ -92,7 +89,6 @@ template SomeType<double>;
 #define DRAKE_DECLARE_CLASS_TEMPLATE_INSTANTIATIONS_ON_DEFAULT_SCALARS(  \
     SomeType) \
 extern template SomeType<double>; \
-extern template SomeType<::maliput::drake::symbolic::Expression>;
 
 /// Declares that template instantiations exist for Drake's default nonsymbolic
 /// scalars.  This should only be used in .h files, never in .cc files.
@@ -198,8 +194,7 @@ constexpr auto Make_Function_Pointers_Pack1() { \
 } \
 static constexpr auto Function_Femplates __attribute__((used)) = \
     Make_Function_Pointers_Pack1< \
-        double, \
-        ::maliput::drake::symbolic::Expression>();
+        double>();
 
 /// Defines template instantiations for Drake's default nonsymbolic scalars.
 /// This should only be used in .cc files, never in .h files.
