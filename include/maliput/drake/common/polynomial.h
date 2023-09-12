@@ -11,9 +11,11 @@
 
 #include <Eigen/Core>
 
+#include "maliput/drake/common/constants.h"
 #include "maliput/drake/common/default_scalars.h"
 #include "maliput/drake/common/drake_assert.h"
-#include "maliput/drake/common/symbolic.h"
+#include "maliput/drake/common/drake_bool.h"
+#include "maliput/drake/common/drake_copyable.h"
 
 namespace maliput::drake {
 /** A scalar multi-variate polynomial, modeled after the msspoly in spotless.
@@ -407,7 +409,7 @@ class Polynomial {
    * @throws std::exception if `e` is not polynomial-convertible.
    * @pre e.is_polynomial() is true.
    */
-  static Polynomial<T> FromExpression(const maliput::drake::symbolic::Expression& e);
+  // static Polynomial<T> FromExpression(const maliput::drake::symbolic::Expression& e);
 
   friend std::ostream& operator<<(std::ostream& os, const Monomial& m) {
     //    if (m.coefficient == 0) return os;

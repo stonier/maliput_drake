@@ -9,27 +9,6 @@ add_library(common
   polynomial.cc
   random.cc
   sorted_pair.cc
-  symbolic.cc
-  symbolic_chebyshev_basis_element.cc
-  symbolic_chebyshev_polynomial.cc
-  symbolic_codegen.cc
-  symbolic_decompose.cc
-  symbolic_environment.cc
-  symbolic_expression.cc
-  symbolic_expression_cell.cc
-  symbolic_formula.cc
-  symbolic_formula_cell.cc
-  symbolic_generic_polynomial.cc
-  symbolic_ldlt.cc
-  symbolic_monomial_basis_element.cc
-  symbolic_monomial.cc
-  symbolic_monomial_util.cc
-  symbolic_polynomial_basis_element.cc
-  symbolic_polynomial.cc
-  symbolic_rational_function.cc
-  symbolic_simplification.cc
-  symbolic_variable.cc
-  symbolic_variables.cc
   text_logging.cc
   value.cc
 )

@@ -4,7 +4,7 @@
 
 #include <type_traits>
 
-#include "maliput/drake/common/symbolic.h"
+// #include "maliput/drake/common/symbolic.h"
 
 namespace maliput::drake {
 namespace systems {
@@ -60,12 +60,12 @@ struct Traits {
 /// }  // namespace systems
 /// }  // namespace maliput::drake
 /// @endcode
-struct NonSymbolicTraits {
-  template <typename T, typename U>
-  using supported = typename std::bool_constant<
-    !std::is_same_v<T, symbolic::Expression> &&
-    !std::is_same_v<U, symbolic::Expression>>;
-};
+// struct NonSymbolicTraits {
+//   template <typename T, typename U>
+//   using supported = typename std::bool_constant<
+//     !std::is_same_v<T, symbolic::Expression> &&
+//     !std::is_same_v<U, symbolic::Expression>>;
+// };
 
 /// A concrete traits class providing sugar to support for converting only from
 /// the `double` scalar type.  For example, if a MySystem<symbolic::Expression>

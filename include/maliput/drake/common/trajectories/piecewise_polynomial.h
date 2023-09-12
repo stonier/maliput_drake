@@ -7,6 +7,7 @@
 #include <vector>
 
 #include <Eigen/Core>
+#include <Eigen/Sparse>
 
 #include "maliput/drake/common/default_scalars.h"
 #include "maliput/drake/common/drake_copyable.h"

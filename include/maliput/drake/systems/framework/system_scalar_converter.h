@@ -1,6 +1,7 @@
 #pragma once
 #define MALIPUT_USED
 
+#include <functional>
 #include <memory>
 #include <typeindex>
 #include <typeinfo>
@@ -10,7 +11,7 @@
 #include "maliput/drake/common/drake_assert.h"
 #include "maliput/drake/common/drake_copyable.h"
 #include "maliput/drake/common/drake_deprecated.h"
-#include "maliput/drake/common/symbolic.h"
+// #include "maliput/drake/common/symbolic.h"
 #include "maliput/drake/systems/framework/scalar_conversion_traits.h"
 #include "maliput/drake/systems/framework/system_type_tag.h"
 
